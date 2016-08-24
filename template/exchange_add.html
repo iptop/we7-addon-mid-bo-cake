@@ -1,0 +1,128 @@
+{template 'common/header'}
+
+<ul class="nav nav-tabs">
+	<li ><a href="{php echo $this->createWebUrl('exchange')}">商品管理</a></li>
+	<li class="active"><a href="{php echo $this->createWebUrl('exchangeadd')}">添加商品</a></li>
+</ul>
+
+<form action="{$_W['siteroot']}web/{php echo $this->createWebUrl('goodssave',array(),true)}" method="post" class="form-horizontal" role="form">
+<div class="panel panel-default">
+<a class="close" data-dismiss="alert">×</a>
+    <div class="panel-heading">
+        兑换商品
+    </div>
+
+	<div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">商品名称</label>
+            <div class="col-sm-9 col-xs-12">
+               	<input type="text" name="name" value="{$servicer['name']}" class="form-control"> 
+            </div>
+        </div>
+    </div>
+
+	<div class="panel-body">
+	<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">商品图片</label>
+			<div class="col-sm-9">
+				{php echo tpl_form_field_image('img', $servicer['img']);}
+			</div>
+		</div>
+		</div>
+	<div class="panel-body">
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">商品数量</label>
+			<div class="col-sm-9">
+               	<input type="text" name="num" value="{$servicer['num']}" class="form-control"> 
+					
+			</div>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">商品价格</label>
+			<div class="col-sm-9">
+               	<input type="text" name="price" value="{$servicer['price']}" class="form-control"> 
+					
+			</div>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">消耗积分</label>
+			<div class="col-sm-9">
+               	<input type="text" name="jifen" value="{$servicer['jifen']}" class="form-control"> 
+					
+			</div>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">兑换数量限制</label>
+			<div class="col-sm-9">
+               	<input type="text" name="limit" value="{$servicer['limit']}" class="form-control"> 
+					
+			</div>
+		</div>
+	</div>
+	<!--
+	<div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">兑换时间</label>
+            <div class="col-sm-9 col-xs-12">
+			{if empty($reply['start_time']) && empty($reply['end_time'])}
+			{php echo tpl_form_field_daterange('actime', array('start'=>date('Y-m-d',time()), 'end'=>date('Y-m-d',time()+3600*24*7)))}
+			{else}
+			{php echo tpl_form_field_daterange('actime', array('start'=>date('Y-m-d',$reply['start_time']), 'end'=>date('Y-m-d',$reply['end_time'])))}
+			{/if}
+            </div>
+        </div>
+    </div>
+	-->
+	
+	<div class="form-group">
+	<label class="col-xs-12 col-sm-3 col-md-2 control-label">活动开始和结束时间</label>
+	<div class="col-sm-4 col-xs-6">
+		{php echo tpl_form_field_date('start_time', !empty($servicer['start_time']) ? date('Y-m-d H:i',$servicer['start_time']) : date('Y-m-d H:i'), 1)}
+	</div>
+	<div class="col-sm-4 col-xs-6">
+		{php echo tpl_form_field_date('end_time', !empty($servicer['end_time']) ? date('Y-m-d H:i',$servicer['end_time']) : date('Y-m-d H:i'), 1)}
+	</div>
+	</div>
+	
+	<div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">商品介绍</label>
+            <div class="col-sm-9 col-xs-12">
+               <textarea style="height:200px;" class="form-control" name="content" id="jiesao">{$servicer['content']}</textarea>
+            </div>
+        </div>
+    </div>
+	
+	
+	<div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">排序</label>
+            <div class="col-sm-9 col-xs-12">
+               	<input type="text" name="order" value="{$servicer['order']}" class="form-control" placeholder="请输入整数数字,数字越大越靠前"> 
+            </div>
+        </div>
+    </div>
+	
+
+	<input type="hidden" name="id" value="{$servicer['id']}">
+</div>
+<div class="col-sm-12">
+				<input name="submit" type="submit" value="提交" class="btn btn-primary col-lg-1">
+				<input type="hidden" name="token" value="60447cf1">
+			</div>
+</form>
+
+<script type="text/javascript">
+require(['jquery', 'util'], function($, u){
+	$(function(){
+		u.editor($('#jiesao')[0]);
+	});
+});
+</script>
+{template 'common/footer'}

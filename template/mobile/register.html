@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>完善资料</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<!-- Mobile Devices Support @begin -->
+	<meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+	<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+	<meta content="no-cache" http-equiv="pragma">
+	<meta content="0" http-equiv="expires">
+	<meta content="telephone=no, address=no" name="format-detection">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" /> <!-- apple devices fullscreen -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<!-- Mobile Devices Support @end -->
+	<script type="text/javascript" src="http://wx.weixiamen.cn/resource/script/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="http://wx.weixiamen.cn/resource/script/common.js"></script>
+		<link type="text/css" rel="stylesheet" href="http://wx.weixiamen.cn/resource/style/bootstrap.css">
+	<script type="text/javascript" src="http://wx.weixiamen.cn/resource/script/bootstrap.js"></script>
+		<link type="text/css" rel="stylesheet" href="http://wx.weixiamen.cn/resource/style/font-awesome.min.css" />
+	<link type="text/css" rel="stylesheet" href="http://wx.weixiamen.cn/themes/mobile/default/style/common.mobile.css">
+	<script type="text/javascript" src="http://wx.weixiamen.cn/resource/script/cascade.js"></script>
+	<script type="text/javascript" src="http://wx.weixiamen.cn/themes/mobile/default/script/jquery.touchwipe.js"></script>
+	<script type="text/javascript" src="http://wx.weixiamen.cn/themes/mobile/default/script/swipe.js"></script>
+</head>
+<style>
+/*重定义bootstrap样式*/
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input{width:100%; margin-bottom:0; box-sizing:border-box; -webkit-box-sizing:border-box; -moz-box-sizing:border-box;}
+input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input{height:30px;}
+.input-append, .input-prepend{width:100%; margin-bottom:0;}
+select{padding:0 5px; line-height:28px; -webkit-appearance:button;}
+.checkbox.inline{margin-top:0;}
+.checkbox.inline + .checkbox.inline {margin-left:0;}
+.checkbox input[type="checkbox"]{filter:alpha(opacity:0); opacity:0;}
+.file{position:relative;}
+.file input[type="file"]{position:absolute; top:0; left:0; width:100%; filter:alpha(opacity:0); opacity:0;}
+.file button{width:100%; text-align:left;}
+.form-item{border-left:3px #ED2F2F solid; padding-left:10px; height:30px; line-height:30px; background:#F7F7F7; margin-bottom:10px;}
+</style>
+<body>
+<div class="main"><style>
+body{font:14px/1.5 Tahoma,Helvetica,'SimSun',sans-serif;}
+/*个人中心*/
+.banner{background:url('http://wx.weixiamen.cn/themes/mobile/default/images/bg_home.jpg');background-size:cover;height:150px;width:100%;position:relative;}
+.avatar{position:absolute; z-index:1; width:100px; height:100px; overflow:hidden; border:1px #000 solid; background:#FFF; margin:20px 0 0 20px;}
+.user{position:absolute; z-index:1; left:140px; top:20px;}
+.user .username{font-weight:600;color:#FFF;}
+.user .usergroup{color:#CCC; font-size:14px;}
+.user .user-list{color:#FFF;}
+.user .user-list span{margin-right:10px;}
+.banner_footer{background:rgba(0, 0, 0, 0.7); width:100%; height:40px; line-height:40px; position:absolute;bottom:0;z-index:0; border-bottom:2px #00AFF0 solid;}
+.banner_footer div{padding-left:140px; position:relative; margin-top:-2px;}
+.user-box{width:100%;overflow: hidden;}
+.user-box .box-item{float:left;text-align:center;display:block;text-decoration:none;outline:none;width:33.10%;height:92px;position:relative;background:#FFF;border-bottom:1px #CCC solid;border-right:1px #CCC solid;}
+.user-box .box-item i{display:inline-block;width:45px;height:45px;margin-top:15px;font-size:35px;color:#666;}
+.user-box .box-item span{color:#333;display:block;font-size:12px;}
+.user-footer .navbar-inner{padding:0 10px;}
+.user-footer .pull-right button{margin-left:10px;}
+.user-footer .pull-left button{margin-right:10px;}
+</style>
+<div class="banner"  style="background: url('{$_W['attachurl']}{$weibb['registimg']}');background-size: cover;
+ ">
+
+	
+</div>
+<div class="profile">
+	<div class="tabbable">
+
+		<form action="{php echo $this->createMobileUrl('regist',array('op'=>'regist','id'=>$rid))}" method="post" enctype="multipart/form-data" onsubmit="return validate();">
+		<div class="tab-content" style="padding:0 10px; margin-top:10px;">
+			<div class="tab-pane active">
+				<div class="form-item">请完善您的资料方便我们在您中奖后联系</div>
+				<table class="form-table">
+										
+					<tr>
+						<th><label for="">昵称</label></th>
+						<td><input type="text" name="nickname" value="{$member['nickname']}"></td>
+																												<tr>
+						<th><label for="">手机</label></th>
+						<td><input type="text" id="" name="mobile" value="{$member['mobile']}" /></td>
+					</tr>
+				</table>
+			</div>
+			<table class="form-table">
+				<tr>
+					<td colspan="2" align="center"><input type="hidden" name="token" value="6b43db2e" /><input type="submit" class="btn btn-large submit" value="提交" name="submit"></td>
+				</tr>
+			</table>
+		</div>
+	</form>
+	</div>
+</div>
+	<div id="footer">&copy;{$_W['account']['name']}&nbsp;&nbsp;</div></div>
+<script type="text/javascript">
+$(function() {
+	$(".user-box .box-item").each(function(i) {
+		i = i +1;
+		if(i%3 == 0) $(this).css("border-right", "0");
+	});
+	$(window).scroll(function(){
+		$(".menu-button").find("i").removeClass("icon-minus-sign").addClass("icon-plus-sign");
+		$(".menu-main").hide();
+	});
+	$(".menu-main a").click(function(){ $(".menu-main").hide(); });
+
+	//控制tab宽度
+	var profile_tab = $(".nav-tabs li");
+	profile_tab.css({"width": 100/profile_tab.length+"%", "text-align": "center"});
+
+	//手机表单处理
+	$(".form-table").delegate(".checkbox input[type='checkbox']", "click", function(){
+		$(this).parent().toggleClass("btn-inverse");
+	});
+	$(".form-table").delegate(".file input[type='file']", "change", function(){
+		var a = $(this).next("button");
+		a.html(a.html() +' '+  $(this).val());
+	});
+
+	//处理固定横向导航条
+	var navbarFixedTop = false, navbarFixedBottom = false;
+	navbarFixedTop = $(".navbar").hasClass("navbar-fixed-top");
+	navbarFixedBottom = $(".navbar").hasClass("navbar-fixed-bottom");
+	if(navbarFixedTop) $("body").css("padding-top", "41px");
+	if(navbarFixedBottom) $("body").css("padding-bottom", "41px");
+});
+
+//对分享时的数据处理
+function _removeHTMLTag(str) {
+	str = str.replace(/<script[^>]*?>[\s\S]*?<\/script>/g,'');
+	str = str.replace(/<style[^>]*?>[\s\S]*?<\/style>/g,'');
+    str = str.replace(/<\/?[^>]*>/g,'');
+    str = str.replace(/\s+/g,'');
+    str = str.replace(/&nbsp;/ig,'');
+    return str;
+}
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+			var _share_img = $('body img:eq(0)').attr("src");
+	if(typeof(_share_img) == "undefined") _share_img = "http://http://wx.weixiamen.cn/source/modules/weibb/icon.jpg";
+	if(_share_img.indexOf("http://") == -1 || _share_img.indexOf("https://") == -1 ) _share_img = "http://http://wx.weixiamen.cn/" + _share_img;
+			var _share_content = _removeHTMLTag($('body').html()).replace("完善资料",'');
+		window.shareData = {
+		"imgUrl": _share_img,
+		"timeLineLink": "http://http://wx.weixiamen.cn/mobile.php?act=module&id=195&name=weibb&do=lottery&weid=4&wxref=mp.weixin.qq.com",
+		"sendFriendLink": "http://http://wx.weixiamen.cn/mobile.php?act=module&id=195&name=weibb&do=lottery&weid=4&wxref=mp.weixin.qq.com",
+		"weiboLink": "http://http://wx.weixiamen.cn/mobile.php?act=module&id=195&name=weibb&do=lottery&weid=4&wxref=mp.weixin.qq.com",
+		"tTitle": "完善资料",
+		"tContent":  _share_content,
+		"fTitle": "完善资料",
+		"fContent":  _share_content,
+		"wContent":  "完善资料"
+	};
+
+	// 发送给好友
+	WeixinJSBridge.on('menu:share:appmessage', function (argv) {
+		WeixinJSBridge.invoke('sendAppMessage', {
+			"img_url": window.shareData.imgUrl,
+			"img_width": "640",
+			"img_height": "640",
+			"link": window.shareData.sendFriendLink,
+			"desc": window.shareData.fContent,
+			"title": window.shareData.fTitle
+		}, function (res) {
+			_report('send_msg', res.err_msg);
+		})
+	});
+
+	// 分享到朋友圈
+	WeixinJSBridge.on('menu:share:timeline', function (argv) {
+		WeixinJSBridge.invoke('shareTimeline', {
+			"img_url": window.shareData.imgUrl,
+			"img_width": "640",
+			"img_height": "640",
+			"link": window.shareData.timeLineLink,
+			"desc": window.shareData.tContent,
+			"title": window.shareData.tTitle
+		}, function (res) {
+			_report('timeline', res.err_msg);
+		});
+	});
+
+	// 分享到微博
+	WeixinJSBridge.on('menu:share:weibo', function (argv) {
+		WeixinJSBridge.invoke('shareWeibo', {
+			"content": window.shareData.wContent,
+			"url": window.shareData.weiboLink
+		}, function (res) {
+			_report('weibo', res.err_msg);
+		});
+	});
+}, false);
+</script>
+</div></body>
+</html>

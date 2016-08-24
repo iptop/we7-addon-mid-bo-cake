@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
+    <link rel="stylesheet" href="../addons/hc_tonganbb/baoxiangstyle/css/rule/base.css" />
+    <link rel="stylesheet" href="../addons/hc_tonganbb/baoxiangstyle/css/rule/global.css" />
+    <link rel="stylesheet" href="../addons/hc_tonganbb/baoxiangstyle/css/rule/buy.css" />
+    <title>规则说明</title>
+</head>
+<body style="background: antiquewhite;">
+<style>
+.boxcontent img{
+     width:100%;
+     max-width:100%;
+	 
+}
+</style>
+
+ 
+
+<form class="productform" method="post" action="{php echo $this->createMobileUrl('order')}">
+    <div class="mobile" id="mobile" style="    background: antiquewhite;">
+        <div class="box boxcontent ">
+			{$setting['rule_des']}
+		</div>
+        
+
+
+    </div>
+</form>
+
+
+
+</body>
+</html>

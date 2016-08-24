@@ -1,0 +1,44 @@
+{template 'common/header'}
+
+<ul class="nav nav-tabs">
+	<li><a href="{php echo $this->createWebUrl('order')}">兑换请求管理</a></li>
+	<li  class="active"><a href="{php echo $this->createWebUrl('orderexcle')}">导出excle</a></li>
+	<!--<li ><a href="{php echo $this->createMobileUrl('rankbaoxiang')}">包厢积分排行</a></li>-->
+</ul>
+
+<div class="main">
+    <div class="panel panel-info">
+	<div class="panel-heading">筛选</div>
+	<div class="panel-body">
+		<form action="{$_W['siteroot']}web/{php echo $this->createWebUrl('ordersearch',array(),true)}" method="post" class="form-horizontal" role="form">
+			
+                
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label" style="width:9%">选择查询条件</label>
+				<div class="col-sm-8 col-lg-9">
+                       <select class="form-control" name="key" id=""  value="{$_GPC['key']}" placeholder="查询条件">
+							<option value="昵称" {if $_GPC['key'] == '昵称'} selected {/if}>昵称</option>
+							<option value="联系方式" {if $_GPC['key'] == '联系方式'} selected {/if}>联系方式</option>	
+							
+					   </select>
+				</div>
+			</div> 
+                <div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label" style="width:9%">输入查询信息</label>
+				<div class="col-sm-8 col-lg-9">
+					<input class="form-control" name="keyword" id="" type="text" value="{$_GPC['keyword']}" placeholder="">
+				</div>
+					<div class="col-sm-3 col-lg-2" style="float: right;"><button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button></div>
+				</div> 
+
+			<div class="form-group">
+			</div>
+		</form>
+	</div>
+	</div>
+
+
+</div>
+{$pager}
+
+{template 'common/footer'}

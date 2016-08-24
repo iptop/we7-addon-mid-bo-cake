@@ -1,0 +1,865 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>{$weibb['title']}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+<link rel="stylesheet" href="../addons/hc_tonganbb/template/images/layout.css" type="text/css" media="all" />
+<link href="../addons/hc_tonganbb/template/images/wap.css?{TIMESTAMP}" rel="stylesheet" type="text/css">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<script src="../addons/hc_tonganbb/template/images/jquery-1.5.1.min.js" type="text/javascript"></script>
+    <link href="../addons/hc_tonganbb/images/frozen.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript">
+
+
+var setFlag = false;
+	$(document).ready(function() {
+		$("#bom").click(function() {
+			$(".panel").slideToggle(1000);
+			
+			if(setFlag){
+				
+				setTimeout(aaaaa,1000);
+				
+				setFlag = false;
+			}else{
+				$(".bbbb").css("z-index","5");
+				setFlag = true;
+			}
+			
+		});
+		
+		$("#panel").click(function() {
+			$(".panel").slideToggle(1000);
+			
+			if(setFlag){
+				
+				setTimeout(aaaaa,1000);
+				
+				setFlag = false;
+			}else{
+				$(".bbbb").css("z-index","5");
+				setFlag = true;
+			}
+			
+		});
+	});
+	
+	
+	function aaaaa(){
+		$(".bbbb").css("z-index","2000");
+		
+	}
+	
+	var lastLeft = new Date();
+var lastRight = new Date();
+var shaking = false;
+var stopNum = 0;
+var ds, a1, a2, a3, a4, a5, a6;
+
+window.sounds = new Object();
+var sound = new Audio('../addons/hc_tonganbb/template/images/bo.mp3');
+var gamecoin = 0;
+sound.load();
+//window.sounds['music'].play();
+window.onload = function() {
+	window.scroll(0, 0);
+	/*var sound = new Audio('/zy.mp3');
+	 sound.load();
+	 window.sounds['music'] = sound;*/
+	//if ( typeof window.DeviceMotionEvent != 'undefined') {
+		var sensitivity = 1;
+
+		var mydiv = document.getElementById("mydiv");
+if (window.DeviceMotionEvent) {
+        var speed = 10;
+        var x = y = lastX = lastY = 0;
+        window.addEventListener('devicemotion', function (e) {
+            var acceleration = e.accelerationIncludingGravity;
+            x = parseInt(acceleration.x);
+            y = parseInt(acceleration.y);
+            if (Math.abs(x - lastX) > speed && Math.abs(y - lastY) > speed && this.status == 0) {
+                shaking = true;
+				begin_func();
+				lastX = lastY = 0;
+            };
+        });
+
+
+    } else {
+       
+    }
+		
+		
+		
+	//}
+		setTimeout(initgame, 1000);
+
+
+	
+}
+
+function initgame(){
+var str;
+$.ajax({
+		type: "POST",
+		url: '{php echo $this->createMobileUrl('initgame', array('id' => $id))}&rd' + Math.random(),
+		dataType: "json",
+		
+		success: function (str) {
+			if (!str) {
+				//return;
+				alert('网络异常，请刷新重试');
+			}
+			switch (str.status) {
+				case '200':
+					$("#id_leftcount").html(str.times);
+					$("#id_frientcount").html(str.friendtimes);
+					//gamecoin = parseInt(str.score);
+					addinfo();
+				break;
+				case '204':
+					$("#txt").html("网络出错啦,请稍候再来4！");
+				break;
+		
+				default:
+					$("#txt").html("出错啦,请稍候再来x！");
+				break;
+			}
+		},
+		
+		error: function (xml, text, thrown){
+			//alert(ret.responseText);
+			alert('网络异常，请刷新重试');
+			//alert(2);
+			return jqresult;
+		}
+	});
+
+		//	console.log(str);
+
+
+	//var str = aaajax('{php echo $this->createMobileUrl('initgame', array('id' => $id))}&rd' + Math.random());
+	
+}
+
+
+function imghide() {
+	
+	var str = bbajax('{php echo $this->createMobileUrl('getaward', array('id' => $id))}&rd' + Math.random());
+	$("#txt").show();console.log(str.status);
+	switch (str.status) {
+		case '200':
+			ds = str.roll;
+			a1 = ds.substr(0, 1);
+			a2 = ds.substr(1, 1);
+			a3 = ds.substr(2, 1);
+			a4 = ds.substr(3, 1);
+			a5 = ds.substr(4, 1);
+			a6 = ds.substr(5, 1);
+			var dianstr="<img src='../addons/hc_tonganbb/template/images/dian" + a1 + ".png' id='p1' class='p_1' /> ";
+				dianstr =dianstr+ "<img src='../addons/hc_tonganbb/template/images/dian" + a2 + ".png' id='p2' class='p_2' /> ";
+				dianstr =dianstr+ "<img src='../addons/hc_tonganbb/template/images/dian" + a3 + ".png' id='p3' class='p_3' /> ";
+				dianstr =dianstr+ "<img src='../addons/hc_tonganbb/template/images/dian" + a4 + ".png' id='p4' class='p_4' /> ";
+				dianstr =dianstr+ "<img src='../addons/hc_tonganbb/template/images/dian" + a5 + ".png' id='p5' class='p_5' /> ";
+				dianstr =dianstr+ "<img src='../addons/hc_tonganbb/template/images/dian" + a6 + ".png' id='p6' class='p_6' />";
+				
+			document.getElementById("rezult").innerHTML = dianstr;
+			$("#txt").html(str.score_each);
+			$("#id_leftcount").html(str.times);
+			$("#id_frientcount").html(str.friendtimes);
+			gamecoin += parseInt(str.score_each);
+			addinfo(str);
+			break;
+		case '201':
+			$("#txt").html("您的博饼次数已经用完！");
+			break;
+		case '300':
+			$("#txt").html("您还没登录哟！");
+			
+			break;
+		case '203':
+			$("#txt").html("全部包厢博完了！");
+			break;
+		case '204':
+			$("#txt").html("本次博饼活动已经结束！");
+			break;
+		case '205':
+			$("#txt").html("您点击太快了休息几秒吧！");
+			break;
+		default:
+			$("#txt").html("出错啦,请稍候再来2！");
+			break;
+	};
+	$("#loading").hide();
+	$("#rezult").show();
+	$("#boyiba").attr("disabled", false);
+	//$("#i_bg").attr("src","images/l"+arr[5]+".wav")
+}
+
+function addinfo(str) {
+	//var gchtml = document.getElementById("id_gamecoin");
+	//gchtml.innerHTML = gamecoin;
+
+	var laststr='';	
+	var laststr2 = '';
+	switch(str.score_each) {
+
+			case '0':
+			laststr="{$weibb['title']}";
+			laststr2="{$weibb['title']}";
+			$("#txt").html("分享好友，再来一次");
+			break;
+		case '未中奖':
+			laststr="没有中奖 再来一次";
+			laststr2="{$weibb['title']}";
+			$("#txt").html("分享好友，再来一次");
+			break;
+		case '一秀':
+		//	laststr="小小秀才，下次再来（一秀）";
+			laststr="恭喜你博中了一秀，获得{$yixiu['credit']}博饼分";
+			laststr2="我在[同安生活网][{$weibb['baoxiangname']}]博饼获得[一秀]，你能超过我吗？";
+			wxShare(laststr2);
+			break;
+		case '二举':
+		//	laststr="一举成名，二举成双（二举）";
+			laststr="恭喜你博中了二举，获得{$erju['credit']}博饼分";
+			laststr2="我在[同安生活网][{$weibb['baoxiangname']}]博饼获得[二举]，你能超过我吗？";
+			wxShare(laststr2);
+			break;
+		case '四进':
+			//laststr="四海升平，四世同堂（四进）";
+			laststr="恭喜你博中了四进，获得{$sijing['credit']}博饼分";
+			laststr2="我在[同安生活网][{$weibb['baoxiangname']}]博饼获得[四进]，你能超过我吗？";
+			wxShare(laststr2);
+			break;
+		case '三红':
+//			laststr="三朋四友，必要分享（三红）";
+			laststr="恭喜你博中了三红，获得{$sanhong['credit']}博饼分";
+			laststr2="我在[同安生活网][{$weibb['baoxiangname']}]博饼获得[三红]，你能超过我吗？";
+			wxShare(laststr2);
+			break;
+			
+		case '对堂':
+			laststr="恭喜你博中了对堂，获得{$duitang['credit']}博饼分";
+
+		//			laststr="一帆风顺，心想事成（三红）";
+			laststr2="我在[同安生活网][{$weibb['baoxiangname']}]博饼获得[对堂]，你能超过我吗？";
+			wxShare(laststr2);
+			break;
+		case '普通状元':
+//			laststr="状元在手，天下我有（状元）";
+			laststr="恭喜你博中了状元，获得{$putongzhuangyuan['credit']}博饼分";
+	
+	laststr2="我在[同安生活网][{$weibb['baoxiangname']}]博饼获得[状元]，你能超过我吗？";
+	wxShare(laststr2); 
+			break;
+		case '五子':
+//			laststr="状元在手，天下我有（五子）";
+			laststr="恭喜你博中了五子，获得{$wuzi['credit']}博饼分";
+	
+	laststr2="我在[同安生活网][{$weibb['baoxiangname']}]博饼获得[五子]，你能超过我吗？";
+			wxShare(laststr2);
+			break;
+		case '五红':
+//			laststr="状元在手，天下我有（五红）";
+			laststr="恭喜你博中了五红，获得{$wuhong['credit']}博饼分";
+	
+	laststr2="我在[同安生活网][{$weibb['baoxiangname']}]博饼获得[五红]，你能超过我吗？";
+			wxShare(laststr2);
+			break;
+		case '六杯红':
+//			laststr="状元在手，天下我有（六杯红）";
+			laststr="恭喜你博中了六杯红，获得{$liupu['credit']}博饼分";
+	
+	laststr2="我在[同安生活网][{$weibb['baoxiangname']}]博饼获得[六杯红]，你能超过我吗？";
+			wxShare(laststr2);
+			break;
+		case '状元插金花':
+//			laststr="状元在手，天下我有（状元插金花）";
+			laststr="恭喜你博中了状元插金花，获得{$chajinghua['credit']}博饼分";
+	
+	laststr2="我在[同安生活网][{$weibb['baoxiangname']}]包厢博饼获得[状元插金花]，你能超过我吗？";
+			wxShare(laststr2);
+			break;
+		
+		default:
+			laststr="出错啦,请稍候再来3！";
+			break;
+	}
+	$("#txt").html(laststr);
+	
+	
+	
+}
+
+var nowDate = 0, lastDate = 0;
+
+function begin_func() {
+
+
+    show()
+    return
+
+	nowDate = new Date().getTime();
+	//	alert(nowDate-lastDate);
+	if (nowDate - lastDate < 1500) {
+		lastDate = nowDate;
+		return false;
+	}
+	lastDate = nowDate;
+	var bbCount = parseInt($("#id_leftcount").html());
+	if (bbCount > 0) {
+		//		OnClick();
+		sound.play();
+		$("#txt").hide();
+		$("#rezult").hide();
+		$("#yaobin").hide();
+		$("#loading").show();
+		$("#boyiba").attr("disabled", true);
+		setTimeout(imghide, 1000);
+
+	} else {
+		$("#txt").html("您今日的次数已用尽,请明天继续！");
+	}
+
+}
+
+function addOne(){
+	$("#shareImg").show();
+	//var str = ccajax('ajax.php?t=' + Math.random());
+}
+
+var jqresult;
+function bbajax(url) {
+
+	$.ajax({
+		url : url,
+		type : 'post',
+		dataType : "json",
+		data : {
+			
+		},
+		async : false,
+		error : function(ret, error) {
+			alert(ret.responseText);alert(1);
+		},
+		success : function(ret) {
+
+			if (!ret) {
+				return;
+			}
+			jqresult = ret;
+		}
+	});
+
+	return jqresult;
+}
+
+function aaajax(url) {
+	/*
+	$.ajax({
+		type : 'post',
+		url : '{php echo $this->createMobileUrl('initgame', array('id' => $id))}&rd' + Math.random(),
+		data : {},
+		dataType : "json",
+		async : false,
+		error : function(ret, error) {
+			//alert(ret.responseText);
+			alert('网络异常，请刷新重试');
+			//alert(2);
+		},
+		success : function(ret) {
+
+			if (!ret) {
+				return;
+			}
+			jqresult = ret;
+		}
+	});
+*/
+
+
+$.ajax({
+		type: "POST",
+		url: url,
+		dataType: "json",
+		
+		success: function (ret) {
+			if (!ret) {
+				return;
+			}
+			jqresult = ret;
+			console.log(jqresult);
+			return jqresult;
+		},
+		
+		error: function (xml, text, thrown){
+			//alert(ret.responseText);
+			alert('网络异常，请刷新重试');
+			//alert(2);
+			return jqresult;
+		}
+	});
+	
+}
+
+function print_array(arr){  
+    for(var key in arr){  
+        if(typeof(arr[key])=='array'||typeof(arr[key])=='object'){//递归调用    
+            print_array(arr[key]);  
+        }else{  
+            document.write(key + ' = ' + arr[key] + '<br>');  
+        }  
+    }  
+} 
+
+function writeObj(obj){  
+    var description = "";  
+    for(var i in obj){    
+        var property=obj[i];    
+        description+=i+" = "+property+"\n";   
+    }    
+    alert(description);  
+}
+
+function shareHide(){
+	
+	$("#shareImg").hide();
+	
+}
+
+
+			
+</script>
+
+<style type="text/css">
+.flipd {
+	width: 50%;
+}
+p {
+	margin: 0;
+	padding: 0;
+}
+img {
+	margin: 0;
+	border: 0;
+	display: block;
+}
+.aaaa {
+	z-index: 1000;
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	width: 100%;
+	_position: absolute;
+	_top: expression(document.documentElement.clientHeight + document.documentElement.scrollTop - this.offsetHeight);
+}
+.bbbb {
+	z-index: 2001;
+	position: fixed;
+	left: 49.5%;
+	bottom: 0px;
+	_position: absolute;
+	_top: expression(document.documentElement.clientHeight + document.documentElement.scrollTop - this.offsetHeight);
+}	
+div.panel, p.flip {
+	margin: 0px;
+	text-align: center;
+	background: #ea5514;
+}
+div.panel {
+	display: none;
+}
+#bom {
+	width: 100%;
+}
+
+</style>
+<style>
+.bx-theme{position:relative;max-width:640px;margin:0 auto;}
+.bx-opt{margin-bottom: 10px;width:100%;text-align:center;}
+.bx-btn{display:inline-block;margin:0 3px;padding:6px 15px;background:rgba(0,0,0,0.5);font-size:1.6rem;color:#fff;}
+.baoxing{width:94%;margin:20px auto;}
+.baoxing a.lingqu-duihuan{display:block;margin-bottom:10px;padding:10px 0;text-align:center;box-sizing:border-box;border:none;font-size:1.4rem;background-color:#f44a3c;color:#fff;}
+.bx-note{padding:1rem 0;font-size:1.6rem;color:#fa3d3d;text-align:center;}
+.today-prize{}
+.today-prize .today-prize-tt{background:url('/pages/images/bobingh5/dotted.png') repeat-x left center;text-align:center;}
+.today-prize .today-prize-tt span{display:inline-block;padding:10px;background:url('/pages/images/bobingh5/baoxiang-bg.gif') repeat;}
+.today-prize ul.clear{}
+.today-prize ul.clear li{float:left;width:30%;margin:0 1.2%;}
+.today-prize ul.clear li img{border:#facb83 2px solid;}
+.bx-fensu{margin-bottom:15px;padding:10px;background-color:#fff0e8;border:#fdb08e 1px dashed;}
+.bx-fensu p{ font-size:1.4rem; line-height:1.6; color:#333; }
+.bx-fensu p em{ color:#ff0000; margin:0 3px; }
+.bx-fensu table{ width:100%;}
+.bx-fensu table td.cell-1{text-align:left;color:#ac1010;}
+.bx-fensu table td.cell-2{text-align:center;color:#ac1010;}
+.bx-fensu table td.cell-3{text-align:right;}
+dl.wap-list-3{width:100%;}
+dl.wap-list-3 dd{padding:0 2%;width:96%;border-bottom:1px dashed #fdb08e; }
+dl.wap-list-3 dd ul{padding:4% 0;width:100%;}
+dl.wap-list-3 dd li{float:left; }
+dl.wap-list-3 dd li.cell-1{width:12%;text-align:center;font-size:3rem;font-weight:bold;color:#a3a08e;vertical-align:middle;}
+dl.wap-list-3 dd li.cell-1.red{color:#ac1010;}
+dl.wap-list-3 dd li.cell-2{width:11%;margin-right:2%;}
+dl.wap-list-3 dd li.cell-3{width:74%; }
+dl.wap-list-3 dd li img{ width:100%; }
+dl.wap-list-3 dd li h3{ margin-bottom:2%; width:100%; height:1.6rem; font-size:1.6rem; overflow:hidden; line-height:1; color:#ac1010; }
+dl.wap-list-3 dd li h3 span{ float:left; display:inline-block; width:65%; height:1.6rem; text-align:left; overflow:hidden;text-overflow: ellipsis; white-space: nowrap; }
+dl.wap-list-3 dd li h3 em{ float:right; display:inline-block; width:30%; height:1.6rem; text-align:right; overflow:hidden; text-overflow: ellipsis; white-space: nowrap; }
+dl.wap-list-3 dd li p{ margin-bottom:2%; width:100%; font-size:1.4rem; color:#000; }
+dl.wap-list-3 dd li h4{ width:100%; height:1.4rem; font-size:1.4rem; line-height:1; overflow:hidden; color:#ac1010; }
+dl.wap-list-3 dd li span{ float:left; display:inline-block; width:50%; height:1.4rem; text-align:left; overflow:hidden;text-overflow: ellipsis; white-space: nowrap; }
+dl.wap-list-3 dd li i{ float:right; display:inline-block; width:45%; height:1.4rem; text-align:right; overflow:hidden; text-overflow: ellipsis; white-space: nowrap; }
+</style>
+</head>
+<body style="background-color: antiquewhite;">
+<img id="shareImg" src="../addons/hc_tonganbb/template/images/sharePic.png" width="100%" style=" position: absolute; z-index: 10000; height: 150%; display: none;" onclick="shareHide()">
+<form name="form1" method="post" action="" id="form1" >
+  <div style="margin:5px auto 60px  auto;">
+       <div style=" height:120px; width:320px; margin:0 auto;">
+	{if empty($weibb['headurl'])}{else}<a href="{$weibb['headurl']}" target="_blank">{/if}
+				{if empty($weibb['headpic'])}
+				<img src="../addons/hc_tonganbb/template/images/wenzi.png" width="100%" />
+				
+				{else}
+				<img src="{$_W['attachurl']}{$weibb['headpic']}" width="100%">
+				{/if}
+				{if empty($weibb['headurl'])}{else}</a>{/if}
+	
+      
+    </div>
+   <!-- <div style="width: 300px; background: url(../addons/hc_tonganbb/template/images/wan.png) no-repeat; position: relative;margin: 5px auto 0px auto"> -->
+   {if empty($weibb['panzi'])}
+    <div style="width: 300px; background: url(../addons/hc_tonganbb/template/images/wan.png) no-repeat; position: relative;margin: 5px auto 0px auto">
+	{else}
+	 <div style="width: 300px; background: url({$_W['attachurl']}{$weibb['panzi']}) no-repeat; position: relative;margin: 5px auto 0px auto">
+	{/if}
+      <!--div class="logo" style="top:30px;"> <img src="../addons/hc_tonganbb/template/images/logo.png" width="100%" /> </div-->
+      <div class="note" id="txt" style=" display:none; position:absolute; left:20px; top:80px; margin:0 auto;background:#fff; font-weight: normal;width: 250px; height:20px; margin:0 auto;"> <span style="z-index:1000;font-size: 18px; color: #CA0A01; font-family: '微软雅黑'; text-align:center"></span> </div>
+      <div style="height:260px;">
+<!--	  <img src="../addons/hc_tonganbb/template/images/lizi.gif" id="loading" style="display: none; padding: 66px 0px 0px 36px;position: absolute; z-index: 80" width="235" height="157" />-->
+<img src="../addons/hc_tonganbb/template/images/lizi.gif" id="loading" style="display: none; padding: 66px 0px 0px 36px;position: absolute; z-index: 80" width="235" height="157" />
+        <div style="display: none;" id="rezult"></div>
+      </div>
+	  <div class="note" style="width:50%; background:none; padding:2px; margin:0 auto;margin-bottom:10px;">剩余:<span id="id_leftcount" style="font-weight: bold;">0</span> 次 助威:<span id="id_frientcount" style="font-weight: bold;">0</span> 次</div>
+    <div style="margin: 0 auto 0px auto;" align="center"> <span onclick="begin_func()"><img src="../addons/hc_tonganbb/template/images/dianji.png" width="200" height="35" /></span>      		<div style="margin: 5px auto 0px auto;" align="center">
+      			<p>晒晒博饼结果有机会增加次数</p>
+		<!--	<span class="boyiba" style="font-weight: normal;" onclick="location='{php echo $this->createMobileUrl('myaward', array('id' => $id))}'">博饼记录</span>-->
+			
+			<span class="boyiba" style="font-weight: normal;" onclick="location='{php echo $this->createMobileUrl('select', array('weid' => $_W['weid']))}'">查看包厢</span>
+			<span class="boyiba" style="font-weight: normal;" onclick="addOne()">炫耀一下</span>
+			<br>
+			
+			<ul class="user-tab wap-tab clear" style="margin:15px 0 ; width:100%">
+                <li id="tabb2"><a   data-toggle="tab" style="line-height: 16px;font-size: 16px;width:100%" id="click2" onclick="click2()">包厢排行榜</a></li>
+                <li   class="on"  id="tabb1"><a   data-toggle="tab" style="line-height: 16px;font-size: 16px;width:100%" onclick="click1()">包厢人员排行</a></li>
+                <li  id="tabb3"><a   data-toggle="tab" style="line-height: 16px;font-size: 16px;width:100%" onclick="click3()">昨日人员排行</a></li>
+			</ul>
+			
+			<div class="use-con wap-con"  id="tab1" style="margin:0 auto;">
+                   <table width="100%" style="font-size:14px;color:#F00;margin-top:10px;text-align:center">
+                            <tr class=" red">
+                                    
+                                        <td width="12%">排名</td>
+                                        <td width="70%">昵称</td>
+                                        <td width="18%">分数</td>
+                    </tr>                     
+                           {loop $today $k  $v}
+                                <tr >
+                                    
+                                        <td >{php echo $k+1}</td>
+                                        <td >{$v['nickname']}</td>
+                                        <td >{$v['credit']}分</td>
+                                        
+                                       
+                                   
+								</tr>      
+							{/loop}
+						</table>
+            </div>
+				<div class="use-con wap-con"  id="tab2"  style="display:none">
+                   <table width="100%" style="font-size:14px;color:#F00;margin-top:10px;text-align:center">
+					<tr class=" red">
+                                    
+                                        <td width="12%">排名</td>
+                                        <td width="70%">包厢</td>
+                                        <td width="18%">分数</td>
+                    </tr> 
+					{loop $zong $k  $v}
+                                <tr class=" red">
+                                    
+                                        <td >{php echo $k+1}</td>
+                                        <td >{$v['baoxiangname']}</td>
+                                        <td >{$v['credit']}</td>
+                                        
+                                       
+                                   
+								</tr>      
+							{/loop}
+                   </table>
+            </div>
+			<div class="use-con wap-con"  id="tab3"  style="display:none">
+                   <table width="100%" style="font-size:14px;color:#F00;margin-top:10px;text-align:center">
+                           <tr class=" red">
+                                    
+                                        <td width="12%">排名</td>
+                                        <td width="70%">昵称</td>
+                                        <td width="18%">分数</td>
+                    </tr>    
+							  {loop $yesterday $k  $v}
+                                <tr class=" red">
+                                    
+                                        <td >{php echo $k+1}</li>
+                                        <td >{$v['nickname']}</td>
+                                        <td >{$v['credit']}分</td>
+                                        
+                                       
+                                   
+								</tr>      
+							{/loop}
+                          </table>
+            </div>
+			
+			
+			
+			
+			
+			
+		</div>
+    </div>
+  </div>
+  
+
+</form>
+
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+<footer>
+        <div class="footer-bg"></div>
+    <div class="footer-nav">
+            <span class="footer-nav-plus on" onclick="bo()"></span>
+			<input type="hidden" value="1" id="flag">
+			<dl class="hide" id="bb" >
+					<dd>
+						<a href="{$_W['siteroot']}app/index.php?i={$_W['uniacid']}&j={$_W['uniacid']}&c=mc&a=bond&do=credits&credittype=credit1">我的积分记录</a>
+					</dd>
+                    <dd><a href="{php echo $this->createMobileUrl('creditRank', array('id' => $id))}">总积分排行</a></dd>
+                    <dd><a href="{php echo $this->createMobileUrl('dayrank', array('id' => $id))}">日积分排行</a></dd> 
+                    <dd><a href="{php echo $this->createMobileUrl('exchange', array('id' => $id))}">奖品兑换</a></dd>
+                    <dd><a href="{php echo $this->createMobileUrl('mygoods', array('id' => $id))}">兑换记录</a></dd>
+                    <dd><a href="{php echo $this->createMobileUrl('rule_des', array('id' => $id))}">规则说明</a></dd>
+                   
+            </dl>
+    </div>
+</footer>
+ <!-- <div class="footer-ad"><a href="" target="_blank" ><img src="{$_W['attachurl']}{$webbb['headpic']}" width="100%" style="display:-webkit-inline-box;max-height:100px;max-width:500px"></a><a class="footer-ad-close">×</a></div>   -->
+
+
+
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+{php $signPackage=$_W['account'][jssdkconfig];}	           
+<script type="text/javascript">
+content = "{$weibb['zhuanfacontent']}";
+wxShare(content);
+function wxShare(content){
+	
+	wx.config({
+    debug: false,
+    appId: '<?php echo $signPackage["appId"];?>',
+    timestamp: '<?php echo $signPackage["timestamp"];?>',
+    nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+    signature: '<?php echo $signPackage["signature"];?>',
+    jsApiList: [
+      'onMenuShareAppMessage',
+	  'onMenuShareTimeline',
+	  'onMenuShareQQ',	  
+    ]
+  });
+  wx.ready(function () {	  
+    wx.onMenuShareAppMessage({
+      title: "{$weibb['zhuanfatitle']}",
+      desc: content,
+      link: "{php echo  $_W['siteroot'] .'app/'. $this->createMobileUrl('index', array('id' => $rid,'share' => 'share','shareid' => $member['id']))}",
+      imgUrl: "{php echo $_W['attachurl'].$weibb['zhuanfaimg']}",
+      trigger: function (res) {
+        //alert('用户点击发送给朋友');
+      },
+      success: function (res) {
+
+        //window.location.href =adurl;//分享成功回调
+      },
+      cancel: function (res) {
+       //window.location.href =adurl;//取消回调
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));//失败回调
+      }
+    });
+	wx.onMenuShareTimeline({
+      title: content,
+      desc: content,
+      link: "{php echo  $_W['siteroot'] .'app/'. $this->createMobileUrl('index', array('id' => $rid,'share' => 'share','shareid' => $member['id']))}",
+      imgUrl: "{php echo $_W['attachurl'].$weibb['zhuanfaimg']}",
+      trigger: function (res) {
+        //alert('用户点击发送给朋友');
+      },
+      success: function (res) {
+        //window.location.href =adurl;//分享成功回调
+      },
+      cancel: function (res) {
+       //window.location.href =adurl;//取消回调
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));//失败回调
+      }
+    });
+	wx.onMenuShareQQ({
+      title: "{$weibb['zhuanfatitle']}",
+      desc: content,
+      link: "{php echo  $_W['siteroot'] .'app/'. $this->createMobileUrl('index', array('id' => $rid,'share' => 'share','shareid' => $member['id']))}",
+      imgUrl: "{php echo $_W['attachurl'].$weibb['zhuanfaimg']}",
+      trigger: function (res) {
+        //alert('用户点击发送给朋友');
+      },
+      success: function (res) {
+        //window.location.href =adurl;//分享成功回调
+      },
+      cancel: function (res) {
+       //window.location.href =adurl;//取消回调
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));//失败回调
+      }
+    });
+	
+	
+	
+	
+  });
+}
+  
+  
+  function getcontent(){
+	//var content = widnow.shareData.tContent;
+	//alert(content);alert(window.shareData.tContent);
+	return content
+  }
+  
+
+  
+  
+  
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+function bo(){
+	var flag = $('#flag').val();
+	if(flag == 1){
+	
+		$('#bb').attr("class","on");
+		$('#flag').val(0);
+	}
+	else{
+	$('#flag').val(1);
+		$('#bb').attr("class","hide");
+	}
+}
+
+
+
+function click1(){
+	$('#tab1').css("display","block");
+	$('#tabb1').addClass("on");
+	$('#tab2').css("display","none");
+	$('#tab3').css("display","none");
+	$('#tabb2').removeAttr("class");
+	$('#tabb3').removeAttr("class");
+}
+
+function click2(){
+	$('#tab2').css("display","block");
+	$('#tabb2').addClass("on");
+	$('#tabb1').removeAttr("class");
+	$('#tab1').css("display","none");
+	$('#tab3').css("display","none");
+	$('#tabb3').removeAttr("class");
+}
+function click3(){
+	$('#tab3').css("display","block");
+	$('#tabb3').addClass("on");
+	$('#tabb1').removeAttr("class");
+	$('#tab1').css("display","none");
+	$('#tab2').css("display","none");
+	$('#tabb2').removeAttr("class");
+}
+</script>	
+<div style="display: none">
+          <script type="text/javascript" src="http://tajs.qq.com/stats?sId=51104868" charset="UTF-8"></script>
+    </div>
+
+
+<script>
+    function show(){
+        document.querySelector("#modal").style.display='block'
+    }
+</script>
+<div id="modal" style="display: none; position: fixed;width: 100%;height: 100%;left: 0;top: 0;">
+    <div style="position: absolute; width: 100%;height: 100%;left: 0;top: 0;z-index:-1; background: #000; opacity: 0.5;">
+        <script>
+            function check(){
+                var val=document.querySelector("#phone").value
+                if(val.length==11 && val[0]=='1'){
+                    val=document.querySelector("#name").value
+                    if(val.length>=2){
+                        return true;
+                    }else{
+                        alert("姓名填写错误")
+                        return false;
+                    }
+                }else{
+                    alert("手机号码格式错误")
+                    return false;
+                }
+            }
+        </script>
+    </div>
+    <div class="ui-flex ui-flex-pack-center ui-flex-align-center" style="position: absolute;left: 0;top: 0;width: 100%;height: 100%;">
+
+
+        <div class="ui-flex ui-flex-pack-center ui-flex-align-center" style="background: #fff; padding-top: 20px;padding-bottom: 20px;padding-left: 0;padding-right: 0; border-radius: 10px; width: 80%">
+            <form action="{php echo $this->createMobileUrl('regPhone',array('id' => $rid))}" method="post" onsubmit="return check()" style="text-align: center;">
+
+                <div style="padding: 20px; text-align: center;  box-sizing: border-box; color: #fff; background:orange;border-radius: 10px; width: 80%; margin: 0 auto ">
+                    以下信息将作为领奖凭证请认真填写
+                </div>
+                <div style="height: 20px;"></div>
+                <input id="name" name="name" type="text" placeholder="请填写您的真实姓名" style=" padding-left: 10px;box-sizing: border-box; border-radius: 5px; border: 1px solid orange; font-size: 20px; width: 80%;height: 40px; display: block; margin: 0 auto; margin-bottom: 20px;"/>
+
+                <input id="phone" name="phone" type="tel" placeholder="请输入您的手机号码" style="padding-left: 10px;box-sizing: border-box; border-radius: 5px; border: 1px solid orange; font-size: 20px; width: 80%;height: 40px; display: block; margin: 0 auto; margin-bottom: 20px;"/>
+                <input type="submit" style="width: 80%;height: 40px; display: block;margin: 0 auto; background: orange; color: #fff;border: none; border-radius: 10px; " value="确认">
+            </form>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+

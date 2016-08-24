@@ -1,0 +1,96 @@
+{template 'common/header'}
+
+<ul class="nav nav-tabs">
+	<li ><a href="{php echo $this->createWebUrl('rankview')}">总积分排行</a></li>
+	<li class="active"><a href="{php echo $this->createWebUrl('ranksearch')}">总积分排行导出</a></li>
+</ul>
+
+<div class="main">
+    <div class="panel panel-info">
+	<div class="panel-heading">excle导出</div>
+	<div class="panel-body">
+		<form action="{$_W['siteroot']}web/{php echo $this->createWebUrl('rankexcle',array(),true)}" method="post" class="form-horizontal" role="form">
+			
+                
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label" style="width:9%">选择查询条件</label>
+				<div class="col-sm-8 col-lg-9">
+                       <select class="form-control" name="key" id=""  value="{$_GPC['key']}" placeholder="查询条件">
+							<option value="积分前n位">积分前n位</option>	
+							
+					   </select>
+				</div>
+			</div> 
+                <div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label"  style="width:9%">输入查询信息</label>
+				<div class="col-sm-8 col-lg-9">
+					<input class="form-control" name="keyword" id="" type="text" value="{$_GPC['keyword']}" placeholder="">
+				</div>
+					<div class="col-sm-3 col-lg-2" style="float: right;"><button class="btn btn-default"><i class="fa fa-search"></i> 导出</button></div>
+				</div> 
+
+			<div class="form-group">
+			</div>
+		</form>
+	</div>
+	</div>
+
+
+</div>
+{$pager}
+
+<script>
+function shenhe(id){
+	var r =  confirm('确定审核吗？');
+	if(r == true){
+		
+		$.ajax({
+                         "type": "post",
+                         "url": "{$_W['siteroot']}web/{php echo $this->createWebUrl('MemberShenhe',array('op' => 'ajax'),true)}",
+                         "data": {"id": id},
+                         "dataType": "json",
+                         "success": function(data){
+                              if(data.success){
+                                   if(data.error == 'error'){
+									alert(data.message);
+								   }else{
+										window.location.reload();
+								   }
+                              }else{
+                                   alert('操作失败，可能是网络有问题');
+                              }
+                         }
+                    });
+	}
+	
+
+}
+
+function quxiao(id){
+	var r =  confirm('确定取消审核吗？');
+	if(r == true){
+		
+		$.ajax({
+                         "type": "post",
+                         "url": "{$_W['siteroot']}web/{php echo $this->createWebUrl('MemberQuxiao',array('op' => 'ajax'),true)}",
+                         "data": {"id": id},
+                         "dataType": "json",
+                         "success": function(data){
+                              if(data.success){
+                                   if(data.error == 'error'){
+									alert(data.message);
+								   }else{
+										window.location.reload();
+								   }
+                              }else{
+                                   alert('操作失败，可能是网络有问题');
+                              }
+                         }
+                    });
+	}
+	
+}
+
+
+</script>
+{template 'common/footer'}

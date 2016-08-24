@@ -1,0 +1,53 @@
+{template 'common/header'}
+<style>
+.col-lg-1 {
+width: 10%;
+}
+</style>
+<div class="main">
+	<form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>博饼参数设置</h4>
+			</div>
+			<div class="panel-body">
+
+	<div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">包厢界面头部图片</label>
+            <div class="col-sm-9 col-xs-12">
+               	{php echo tpl_form_field_image('headpic', $settings['headpic']);}
+            </div>
+        </div>
+    </div>
+			
+	<div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">规则介绍</label>
+            <div class="col-sm-9 col-xs-12">
+               <textarea style="height:600px;" class="form-control" name="rule_des" id="jiesao">{$settings['rule_des']}</textarea>
+            </div>
+        </div>
+    </div>
+			
+
+<script type="text/javascript">
+require(['jquery', 'util'], function($, u){
+	$(function(){
+		u.editor($('#jiesao')[0]);
+	});
+});
+</script>					
+					
+
+				<div class="form-group col-sm-12">
+					<input type="hidden" name="token" value="{$_W['token']}" />
+					<input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" />
+				</div>
+			</div>
+		</div>
+
+	</form>
+</div>
+
+{template 'common/footer'}

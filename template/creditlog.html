@@ -1,0 +1,73 @@
+{template 'common/header'}
+
+
+
+<div class="main">
+    <div class="panel panel-info">
+	<div class="panel-heading">筛选</div>
+	<div class="panel-body">
+		<form action="{$_W['siteroot']}web/{php echo $this->createWebUrl('CreditLogSearch',array('id'=>$rid),true)}" method="post" class="form-horizontal" role="form">
+			
+                
+			<div class="form-group">
+				<label style="  padding-left: 8px;" class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">选择查询条件</label>
+				<div class="col-sm-8 col-lg-9">
+                       <select class="form-control" name="key" id=""  value="{$_GPC['key']}" placeholder="查询条件">
+							<option value="积分" {if $key=="积分"} selected {/if}>积分大于等于n</option>
+							<option value="昵称" {if $key=="昵称"} selected {/if}>昵称</option>
+							<option value="手机号码" {if $key=="手机号码"} selected {/if}>手机号码</option>
+							
+					   </select>
+				</div>
+			</div> 
+                <div class="form-group">
+				<label style="  padding-left: 8px;" class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">输入查询信息</label>
+				<div class="col-sm-8 col-lg-9">
+					<input class="form-control" name="keyword" id="" type="text" value="{$_GPC['keyword']}" placeholder="查询 积分 / 手机号 / 姓名">
+				</div>
+					<div class="col-sm-3 col-lg-2"><button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button></div>
+				</div> 
+
+			<div class="form-group">
+			</div>
+		</form>
+	</div>
+	</div>
+
+	<div class="panel panel-default">
+	<div class="panel-body table-responsive">
+		<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th style="width:70px;">昵称</th>
+					<th style="width:80px;">电话号码</th>
+					<th style="width:100px;">注册时间</th>
+					<th style="width:120px; text-align:right;">积分</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $creditlog $item}
+				<tr>
+					<td>{$item['nickname']}</td>
+					<td>{$item['mobile']}</td>
+					<td>{php echo date('m-d H:i:s', $item['createtime'])}</td>
+					<td style="text-align:right;">
+						{$item['credit']}
+					</td>
+				</tr>
+				{/loop}
+			</tbody>
+			<!--tr>
+				<td></td>
+				<td colspan="3">
+					<input name="token" type="hidden" value="{$_W['token']}" />
+					<input type="submit" class="btn btn-primary" name="submit" value="提交" />
+				</td>
+			</tr-->
+		</table>
+	</div>
+	</div>
+</div>
+{$pager}
+
+{template 'common/footer'}

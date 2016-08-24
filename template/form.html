@@ -1,0 +1,371 @@
+<input type="hidden" name="reply_id" value="{$reply['rid']}" />
+<input type="hidden" name="id" value="{$reply['id']}" />
+
+
+<div class="panel panel-default">
+<a class="close" data-dismiss="alert">×</a>
+    <div class="panel-heading">
+        中秋博饼活动设置
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动标题</label>
+            <div class="col-sm-9 col-xs-12">
+               	<input type="text" name="title" class="form-control" value="{$reply['title']}">
+				<div class="help-block">显示在网页标题中</div>
+            </div>
+        </div>
+    </div>
+	<div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动图片</label>
+            <div class="col-sm-9 col-xs-12">
+               	{php echo tpl_form_field_image('picture', $reply['picture']);}
+				<div class="help-block">用于回复关键字后返回图片 700*300</div>
+            </div>
+        </div>
+    </div>
+	<div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">博饼首页图片</label>
+            <div class="col-sm-9 col-xs-12">
+               	{php echo tpl_form_field_image('indexPicture', $reply['indexPicture']);}
+				<div class="help-block">进入游戏后的首页图片 500*800</div>
+            </div>
+        </div>
+    </div>
+	<div class="form-group">
+		<label class="col-xs-12 col-sm-3 col-md-2 control-label">包厢大小</label>
+			<div class="col-sm-9 col-xs-12">
+				<label class="radio-inline">
+					<input type="radio" name="baoxiangsize" value="2" {if $reply['baoxiangsize'] == "2"}checked="checked"{/if}> 大包厢
+				</label>
+				<label class="radio-inline">
+					 <input type="radio" name="baoxiangsize" value="3" {if $reply['baoxiangsize'] == "3"}checked="checked"{/if}> 小包厢
+				 </label>
+			</div>
+	</div>
+	<div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">包厢图片</label>
+            <div class="col-sm-9 col-xs-12">
+               	{php echo tpl_form_field_image('baoxiangimg', $reply['baoxiangimg']);}
+			<div class="help-block">大包厢600*400 小包厢300*300</div>
+            </div>
+        </div>
+    </div>
+	<div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">包厢排序</label>
+            <div class="col-sm-9 col-xs-12">
+				<input type="text" name="baoxiangorder" class="form-control" value="{$reply['baoxiangorder']}">
+				<div class="help-block">数字越大越靠前，大包厢永远在小包厢前面</div>
+            </div>
+        </div>
+    </div>
+	<div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">包厢名称</label>
+            <div class="col-sm-9 col-xs-12">
+				<input type="text" name="baoxiangname" class="form-control" value="{$reply['baoxiangname']}">
+            </div>
+        </div>
+    </div>
+	
+	<div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">手机头图</label>
+            <div class="col-sm-9 col-xs-12">
+               	{php echo tpl_form_field_image('headpic', $reply['headpic']);}
+				<div class="help-block">手机头部广告图 450*100</div>
+            </div>
+        </div>
+    </div>
+	<div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">赞助商链接</label>
+            <div class="col-sm-9 col-xs-12">
+               	<input type="text" name="headurl" class="form-control" value="{$reply['headurl']}">
+				<div class="help-block">手机头部赞助商链接 (网址太长,可能导致转发无效,请先生成短网址,下同) <a href='http://www.waqiang.com/index.php/url/shorten'>短网址生成页</a></div>
+            </div>
+        </div>
+    </div>	
+	<div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">关注引导链接</label>
+            <div class="col-sm-9 col-xs-12">
+               	<input type="text" name="guanzhuUrl" class="form-control" value="{$reply['guanzhuUrl']}">
+				<div class="help-block">【重要】用户未关注时,直接跳转至该页，可以微信群发一个图文，然后把链接填入</div>
+            </div>
+        </div>
+    </div>
+	<div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">盘子</label>
+            <div class="col-sm-9 col-xs-12">
+               	{php echo tpl_form_field_image('panzi', $reply['panzi']);}
+					<div class="help-block">盘子图 321*321 ,请使用ＰＮＧ２４格式</div>
+            </div>
+        </div>
+    </div>
+	<div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">转发显示图片</label>
+            <div class="col-sm-9 col-xs-12">
+               	{php echo tpl_form_field_image('zhuanfaimg', $reply['zhuanfaimg']);}
+            </div>
+        </div>
+    </div>
+	<div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动简介</label>
+            <div class="col-sm-9 col-xs-12">
+               	<input type="text" name="zhuanfatitle" class="form-control" value="{$reply['zhuanfatitle']}">
+			   <div class="help-block">用户按转发的时候显示的标题</div>
+            </div>
+        </div>
+    </div>
+	<div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">转发内容</label>
+            <div class="col-sm-9 col-xs-12">
+               	<input type="text" name="zhuanfacontent" class="form-control" value="{$reply['zhuanfacontent']}">
+			   <div class="help-block">用户按转发的时候显示的内容</div>
+			</div>
+        </div>
+    </div>
+	<div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">填写资料页面头部图片</label>
+            <div class="col-sm-9 col-xs-12">
+               	{php echo tpl_form_field_image('registimg', $reply['registimg']);}
+            </div>
+        </div>
+    </div>
+	<!--
+	<div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动时间</label>
+            <div class="col-sm-9 col-xs-12">
+			{if empty($reply['start_time']) && empty($reply['end_time'])}
+			{php echo tpl_form_field_daterange('actime', array('start'=>date('Y-m-d',time()), 'end'=>date('Y-m-d',time()+3600*24*7)))}
+			{else}
+			{php echo tpl_form_field_daterange('actime', array('start'=>date('Y-m-d',$reply['start_time']), 'end'=>date('Y-m-d',$reply['end_time'])))}
+			{/if}
+            </div>
+        </div>
+    </div>
+	-->
+	<div class="form-group">
+	<label class="col-xs-12 col-sm-3 col-md-2 control-label">活动开始和结束时间</label>
+	<div class="col-sm-4 col-xs-6">
+		{php echo tpl_form_field_date('start_time', !empty($reply['start_time']) ? date('Y-m-d H:i',$reply['start_time']) : date('Y-m-d H:i'), 1)}
+	</div>
+	<div class="col-sm-4 col-xs-6">
+		{php echo tpl_form_field_date('end_time', !empty($reply['end_time']) ? date('Y-m-d H:i',$reply['end_time']) : date('Y-m-d H:i'), 1)}
+	</div>
+	</div>
+
+	
+	<div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动简介</label>
+            <div class="col-sm-9 col-xs-12">
+               <textarea style="height:50px;" name="description" class="form-control">{$reply['description']}</textarea>
+			   <div class="help-block">用于回复关键字后图文显示的简介</div>
+            </div>
+        </div>
+    </div>
+
+	<div class="form-group">
+	<label class="col-xs-12 col-sm-3 col-md-2 control-label">每天赠送博饼次数</label>
+	<div class="col-sm-6 col-xs-12">
+		<div class="input-group">
+			<input type="text" name="maxlottery" value="{$reply['maxlottery']}" id="weight" class="form-control" value="500.00">
+			<span class="input-group-addon">次</span>
+		</div>
+	</div>
+	</div>
+			
+	<div class="form-group">
+	<label class="col-xs-12 col-sm-3 col-md-2 control-label">转发奖励次数</label>
+	<div class="col-sm-6 col-xs-12">
+		<div class="input-group">
+			<input type="text" name="sharecount" value="{$reply['sharecount']}" id="total" class="form-control" >
+			<span class="input-group-addon">次</span>
+		</div>
+		<span class="help-block">转发给朋友后自己获得的奖励次数，最大最大奖励次数</span>
+	</div>
+	</div>
+				
+	<div class="form-group">
+	<label class="col-xs-12 col-sm-3 col-md-2 control-label">最大奖励次数</label>
+	<div class="col-sm-6 col-xs-12">
+		<div class="input-group">
+			<input type="text" name="prace_times" value="{$reply['prace_times']}" id="total" class="form-control" >
+			<span class="input-group-addon">次</span>
+		</div>
+		<span class="help-block">用户通过转发获取的奖励次数上限</span>
+	</div>
+	</div>
+	
+<style>
+.ruoling {
+	width: 28%;
+    margin-left: inherit;
+}
+
+</style>
+	
+	
+	<div class="form-group">
+	<label class="col-xs-12 col-sm-3 col-md-2 control-label">中奖设置</label>
+	<div class="col-sm-9 col-xs-12">
+		<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">一秀中奖率</span>
+			<input type="text" name="yixiuPro" class="form-control  " value="{$yixiu['probalilty']}">
+			<span class="input-group-addon">%</span>
+		</div>
+		<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">一秀中奖积分</span>
+			<input type="text" name="yixiucredit" id="productprice" class="form-control  " value="{$yixiu['credit']}">
+			<span class="input-group-addon">分</span>
+		</div>
+		<!--<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">一秀卡券id</span>
+			<input type="text" style="width:280%" name="yixiucard" id="productprice" class="form-control"  value="{$yixiu['card_id']}">
+		</div>-->
+		<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">二举中奖率</span>
+			<input type="text" name="erjuPro" class="form-control  " value="{$erju['probalilty']}">
+			<span class="input-group-addon">%</span>
+		</div>
+		<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">二举中奖积分</span>
+			<input type="text" name="erjucredit" id="productprice" class="form-control  " value="{$erju['credit']}">
+			<span class="input-group-addon">分</span>
+		</div>
+		<!--<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">二举卡券id</span>
+			<input type="text" style="width:280%" name="erjucard" id="productprice" class="form-control"  value="{$erju['card_id']}">
+		</div>-->
+		<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">三红中奖率</span>
+			<input type="text" name="sanhongPro" class="form-control  " value="{$sanhong['probalilty']}">
+			<span class="input-group-addon">%</span>
+		</div>
+		<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">三红中奖积分</span>
+			<input type="text" name="sanhongcredit" id="productprice" class="form-control  " value="{$sanhong['credit']}">
+			<span class="input-group-addon">分</span>
+		</div>
+		<!--<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">三红卡券id</span>
+			<input type="text" style="width:280%" name="sanhongcard" id="productprice" class="form-control"  value="{$sanhong['card_id']}">
+		</div>-->
+		<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">四进中奖率</span>
+			<input type="text" name="sijingPro" class="form-control  " value="{$sijing['probalilty']}">
+			<span class="input-group-addon">%</span>
+		</div>
+		<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">四进中奖积分</span>
+			<input type="text" name="sijingcredit" id="productprice" class="form-control  " value="{$sijing['credit']}">
+			<span class="input-group-addon">分</span>
+		</div>
+		<!--<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">四进卡券id</span>
+			<input type="text" style="width:280%" name="sijingcard" id="productprice" class="form-control"  value="{$sijing['card_id']}">
+		</div>-->
+		<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">对堂中奖率</span>
+			<input type="text" name="duitangPro" class="form-control  " value="{$duitang['probalilty']}">
+			<span class="input-group-addon">%</span>
+		</div>
+		<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">对堂中奖积分</span>
+			<input type="text" name="duitangcredit" id="productprice" class="form-control  " value="{$duitang['credit']}">
+			<span class="input-group-addon">分</span>
+		</div>	
+		<!--<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">对堂卡券id</span>
+			<input type="text" style="width:280%" name="duitangcard" id="productprice" class="form-control"  value="{$duitang['card_id']}">
+		</div>-->
+		<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">普通状元中奖率</span>
+			<input type="text" name="putongzhuangyuanPro" class="form-control  " value="{$putongzhuangyuan['probalilty']}">
+			<span class="input-group-addon">%</span>
+		</div>
+		<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">普通状元中奖积分</span>
+			<input type="text" name="putongzhuangyuancredit" id="productprice" class="form-control  " value="{$putongzhuangyuan['credit']}">
+			<span class="input-group-addon">分</span>
+		</div>
+		<!--<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">普通状元卡券id</span>
+			<input type="text" style="width:320%" name="putongzhuangyuancard" id="productprice" class="form-control"  value="{$putongzhuangyuan['card_id']}">
+		</div>-->
+		<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">五子中奖率</span>
+			<input type="text" name="wuziPro" class="form-control  " value="{$wuzi['probalilty']}">
+			<span class="input-group-addon">%</span>
+		</div>
+		<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">五子中奖积分</span>
+			<input type="text" name="wuzicredit" id="productprice" class="form-control  " value="{$wuzi['credit']}">
+			<span class="input-group-addon">分</span>
+		</div>
+		<!--<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">五子卡券id</span>
+			<input type="text" style="width:280%" name="wuzicard" id="productprice" class="form-control"  value="{$wuzi['card_id']}">
+		</div>-->		
+		<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">五红中奖率</span>
+			<input type="text" name="wuhongPro" class="form-control  " value="{$wuhong['probalilty']}">
+			<span class="input-group-addon">%</span>
+		</div>
+		<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">五红中奖积分</span>
+			<input type="text" name="wuhongcredit" id="productprice" class="form-control  " value="{$wuhong['credit']}">
+			<span class="input-group-addon">分</span>
+		</div>
+		<!--<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">五红卡券id</span>
+			<input type="text" style="width:280%" name="wuhongcard" id="productprice" class="form-control"  value="{$wuhong['card_id']}">
+		</div>-->
+		<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">六杯红中奖率</span>
+			<input type="text" name="liupuPro" class="form-control  " value="{$liupu['probalilty']}">
+			<span class="input-group-addon">%</span>
+		</div>
+		<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">六杯红中奖积分</span>
+			<input type="text" name="liupucredit" id="productprice" class="form-control  " value="{$liupu['credit']}">
+			<span class="input-group-addon">分</span>
+		</div>
+		<!--<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">六杯红卡券id</span>
+			<input type="text" style="width:299%" name="liupucard" id="productprice" class="form-control"  value="{$liupu['card_id']}">
+		</div>-->
+		<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">状元插金花中奖率</span>
+			<input type="text" name="chajinghuaPro" class="form-control  " value="{$chajinghua['probalilty']}">
+			<span class="input-group-addon">%</span>
+		</div>
+		<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">状元插金花中奖积分</span>
+			<input type="text" name="chajinghuacredit" id="productprice" class="form-control  " value="{$chajinghua['credit']}">
+			<span class="input-group-addon">分</span>
+		</div>
+		<!--<div class="input-group form-group ruoling" style=" margin-left: inherit;">
+			<span class="input-group-addon">状元插金花卡券id</span>
+			<input type="text" style="width:345%" name="chajinghuacard" id="productprice" class="form-control"  value="{$chajinghua['card_id']}">
+		</div>-->
+	</div>
+	</div>
+	
+	
+	
+	
+</div>
+

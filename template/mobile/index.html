@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="”apple-mobile-web-app-capable”" content="”yes”">
+<meta content="telephone=no" name="format-detection"> 
+<title>{$weibb['title']}</title>
+<link href="../addons/hc_tonganbb/images/style.css" rel="stylesheet" type="text/css">
+<style>
+body{ background:#04113d ;
+ background-size:cover;
+ padding:0;
+margin:0;
+}
+body {
+	display: block;
+	margin: 0;
+	padding:0;
+	background-size:100% auto;
+	background-repeat:no-repeat;
+	background-color:rgb(68,0,2);
+}
+.power-by{ font-size:1.2em; text-align:center; line-height:30px; color:#E9E900;}
+
+</style>
+</head>
+
+<body>
+{if $checkfollow == 4}
+<img id="shareImg" src="../addons/hc_tonganbb/baoxiangstyle/img/guanzhu.png" width="100%" style=" position: absolute; z-index: 10000; height: 100%; " >
+{else}
+		<a href="{php echo $this->createMobileUrl('select', array('id' => $rid))}" style="text-decoration: none" >		<img src="{$_W['attachurl']}{$weibb['indexPicture']}" width="100%"></a>
+{/if}	
+		
+	<!--	<a onclick="addcard1()" style="text-decoration: none" >		<img src="{$_W['attachurl']}{$weibb['indexPicture']}" width="100%"></a>
+-->
+	
+
+
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+{php $signPackage=$_W['account'][jssdkconfig];}	           
+<script type="text/javascript">
+  wx.config({
+    debug: false,
+    appId: '<?php echo $signPackage["appId"];?>',
+    timestamp: '<?php echo $signPackage["timestamp"];?>',
+    nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+    signature: '<?php echo $signPackage["signature"];?>',
+    jsApiList: [
+      'onMenuShareAppMessage',
+	  'onMenuShareTimeline',
+	  'onMenuShareQQ',	  
+    ]
+  });
+  wx.ready(function () {
+    wx.onMenuShareAppMessage({
+      title: "{$weibb['title']}",
+      desc: "{$weibb['description']}",
+      link: "{$_W['siteroot']}app/{php echo $this->createMobileUrl('index', array('id' => $rid,'share' => 'share','shareid' => $member['id']))}",
+      imgUrl: "{$_W['siteroot']}addons/hc_tonganbb/images/d1.png",
+      trigger: function (res) {
+        //alert('用户点击发送给朋友');
+      },
+      success: function (res) {
+        //window.location.href =adurl;//分享成功回调
+      },
+      cancel: function (res) {
+       //window.location.href =adurl;//取消回调
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));//失败回调
+      }
+    });
+	wx.onMenuShareTimeline({
+      title: "{$weibb['title']}",
+      desc: window.shareData.fTitle,
+      link: "{$_W['siteroot']}app/{php echo $this->createMobileUrl('index', array('id' => $rid,'share' => 'share','shareid' => $member['id']))}",
+      imgUrl: "{$_W['siteroot']}addons/hc_tonganbb/images/d1.png",
+      trigger: function (res) {
+        //alert('用户点击发送给朋友');
+      },
+      success: function (res) {
+        //window.location.href =adurl;//分享成功回调
+      },
+      cancel: function (res) {
+       //window.location.href =adurl;//取消回调
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));//失败回调
+      }
+    });
+	wx.onMenuShareQQ({
+      title: "{$weibb['title']}",
+      desc: window.shareData.fTitle,
+      link: "{$_W['siteroot']}app/{php echo $this->createMobileUrl('index', array('id' => $rid,'share' => 'share','shareid' => $member['id']))}",
+      imgUrl: "{$_W['siteroot']}addons/hc_tonganbb/images/d1.png",
+      trigger: function (res) {
+        //alert('用户点击发送给朋友');
+      },
+      success: function (res) {
+        //window.location.href =adurl;//分享成功回调
+      },
+      cancel: function (res) {
+       //window.location.href =adurl;//取消回调
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));//失败回调
+      }
+    });
+	
+	
+	
+	
+  });
+
+  
+  
+  
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.we7.cc" versionCode="0.6">
+	<application setting="true">
+		<name><![CDATA[同安生活博饼]]></name>
+		<identifie><![CDATA[hc_tonganbb]]></identifie>
+		<version><![CDATA[1.7]]></version>
+		<type><![CDATA[activity]]></type>
+		<ability><![CDATA[同安生活博饼]]></ability>		
+		<description><![CDATA[适合商家中秋活动]]></description>
+		<author><![CDATA[火池网络]]></author>
+		<url><![CDATA[http://www.weixiamen.cn/]]></url>
+	</application>
+	<platform>
+		<subscribes>
+		</subscribes>
+		<handles>
+			<message type="text" />
+		</handles>
+		<rule embed="true" />
+	</platform>
+	<bindings>
+		<rule>
+			<entry title="查看积分记录" do="creditlog" state="" />				
+		</rule>
+		<menu>
+			<entry title="查看排行榜" do="rankview" direct="false" />
+			<entry title="兑换商品管理" do="exchange" direct="false" />
+			<entry title="兑换请求管理" do="order" direct="false" />
+		</menu>
+	</bindings>
+	<install><![CDATA[
+	
+CREATE TABLE IF NOT EXISTS `ims_hc_tonganbb_award` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `weid` int(10) NOT NULL,
+  `rid` int(10) unsigned NOT NULL COMMENT '规则ID',
+  `title` varchar(50) NOT NULL COMMENT '奖项',
+  `total` int(11) NOT NULL COMMENT '数量',
+  `probalilty` varchar(5) NOT NULL COMMENT '概率单位%',
+  `description` varchar(100) NOT NULL DEFAULT '' COMMENT '描述',
+  `credit` int(10) NOT NULL,
+  `card_id` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_hc_tonganbb_card_ticket` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `weid` int(10) DEFAULT NULL,
+  `createtime` varchar(20) DEFAULT NULL,
+  `ticket` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_hc_tonganbb_dayscredit` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `weid` int(10) NOT NULL,
+  `mid` int(10) NOT NULL,
+  `openid` varchar(255) NOT NULL,
+  `createtime` varchar(20) NOT NULL,
+  `credit` int(10) NOT NULL,
+  `rid` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_hc_tonganbb_exchange_order` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `weid` int(10) DEFAULT NULL,
+  `openid` varchar(255) DEFAULT NULL,
+  `mid` int(10) DEFAULT NULL,
+  `num` int(10) DEFAULT NULL,
+  `goodsid` int(10) DEFAULT NULL,
+  `realname` varchar(255) DEFAULT NULL,
+  `mobile` varchar(20) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `createtime` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_hc_tonganbb_goods` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `weid` int(10) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `num` int(10) DEFAULT NULL,
+  `price` int(10) DEFAULT NULL,
+  `jifen` int(10) DEFAULT NULL,
+  `limit` int(10) DEFAULT NULL,
+  `start_time` varchar(20) DEFAULT NULL,
+  `end_time` varchar(20) DEFAULT NULL,
+  `content` text,
+  `order` int(10) DEFAULT NULL,
+  `img` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+
+
+
+CREATE TABLE IF NOT EXISTS `ims_hc_tonganbb_member` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `weid` int(10) NOT NULL,
+  `openid` varchar(255) NOT NULL,
+  `createtime` varchar(20) NOT NULL,
+  `nickname` varchar(20) NOT NULL,
+  `mobile` varchar(20) NOT NULL,
+  `rid` int(10) NOT NULL,
+  `headimg` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE IF NOT EXISTS `ims_hc_tonganbb_reply` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `weid` int(10) NOT NULL,
+  `rid` int(10) unsigned NOT NULL COMMENT '规则ID',
+  `picture` varchar(100) NOT NULL COMMENT '活动图片',
+  `description` varchar(100) NOT NULL COMMENT '活动描述',
+  `rule` text NOT NULL COMMENT '规则',
+  `periodlottery` smallint(10) unsigned NOT NULL DEFAULT '1' COMMENT '0为无周期',
+  `maxlottery` tinyint(3) unsigned NOT NULL COMMENT '最大抽奖数',
+  `sharecount` int(11) NOT NULL COMMENT '中奖奖励积分',
+  `misscredit` int(11) NOT NULL COMMENT '未中奖奖励积分',
+  `start_time` int(10) DEFAULT NULL,
+  `end_time` int(10) DEFAULT NULL,
+  `fansstatus` int(10) DEFAULT NULL,
+  `prace_times` int(10) NOT NULL,
+  `title` varchar(50) DEFAULT NULL COMMENT '标题',
+  `indexPicture` varchar(100) DEFAULT NULL COMMENT '首页图片',
+  `headpic` varchar(100) DEFAULT NULL COMMENT '游戏头部图片',
+  `headurl` varchar(100) DEFAULT NULL COMMENT '赞助商链接',
+  `panzi` varchar(100) DEFAULT NULL COMMENT '盘子图片',
+  `zhuanfaimg` varchar(100) DEFAULT NULL COMMENT '盘子图片',
+  `guanzhuUrl` varchar(255) DEFAULT NULL COMMENT '未关注跳转链接',
+  `card_id` varchar(255) DEFAULT NULL,
+  `registimg` varchar(255) DEFAULT NULL,
+  `baoxiangimg` varchar(255) DEFAULT NULL,
+  `baoxiangorder` int(10) DEFAULT NULL,
+  `baoxiangsize` int(10) DEFAULT NULL,
+  `baoxiangname` varchar(255) DEFAULT NULL,
+  `zhuanfatitle` varchar(255) DEFAULT NULL,
+  `zhuanfacontent` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_hc_tonganbb_share` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `rid` int(10) NOT NULL,
+  `from_user` varchar(50) NOT NULL,
+  `count` int(10) NOT NULL DEFAULT '0',
+  `createtime` int(10) NOT NULL,
+  `mid` int(10) NOT NULL,
+  `sharetotal` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_hc_tonganbb_user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rid` int(10) NOT NULL DEFAULT '0',
+  `from_user` varchar(50) NOT NULL COMMENT '用户唯一身份ID',
+  `title` varchar(50) NOT NULL DEFAULT '0' COMMENT '获奖名称',
+  `iszhuangyuan` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否是状元，-1代表未中奖，0代表不是，1代表普通状元，2代表五子，3代表五红，4代表六浦，5代表插金花，6代表六红',
+  `createtime` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0表示未领奖，1表示已领奖',
+  `titleid` int(10) NOT NULL COMMENT '0代表未中奖，1代表一秀，2代表二举，3代表三红，4代表四进,5代表对堂，6代表普通状元，7代表五子，8代表五红，9代表六浦，10代表状元插金花',
+  `credit` int(10) NOT NULL,
+  `baoxiangname` varchar(255) NOT NULL,
+  `mid` int(10) NOT NULL,
+  `nickname` varchar(255) NOT NULL,
+  `weid` int(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_id_from_user` (`id`,`from_user`) USING BTREE
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+	
+
+	]]></install>
+	<uninstall><![CDATA[
+
+	]]></uninstall>
+	<upgrade><![CDATA[upgrade.php]]></upgrade>
+</manifest>

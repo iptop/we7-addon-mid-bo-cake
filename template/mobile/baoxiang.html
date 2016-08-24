@@ -1,0 +1,244 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="MobileOptimized" content="320"/>
+<title>2015同安生活网第4届网络博饼嘉年华</title>
+<link href="http://bobing.xmfish.com/pages/styles/bobingh5/wap.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="http://bbs.xmfish.com/apps/rt/www/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="../addons/hc_tonganbb/baoxiangstyle/js/tinybox.js"></script>
+</head>
+<style type="text/css"> 
+.mydiv { 
+background-color: 0;
+
+text-align: center; 
+line-height: 40px; 
+font-size: 12px; 
+font-weight: bold; 
+z-index:99; 
+width: 300px; 
+height: 70px; 
+left:50%;/*FF IE7*/ 
+top: 50%;/*FF IE7*/ 
+
+margin-left:-150px!important;/*FF IE7 */ 
+margin-top:-60px!important;/*FF IE7 */ 
+
+margin-top:0px; 
+
+position:fixed!important;/*FF IE7*/ 
+position:absolute;/*IE6*/ 
+
+_top: expression(eval(document.compatMode && 
+document.compatMode=='CSS1Compat') ? 
+documentElement.scrollTop + (document.documentElement.clientHeight-this.offsetHeight)/2 :/*IE6*/ 
+document.body.scrollTop + (document.body.clientHeight - this.clientHeight)/2);/*IE5 IE5.5*/ 
+
+} 
+
+.bg { 
+background-color: #ccc; 
+width: 100%; 
+height: 100%; 
+left:0; 
+top:0;/*FF IE7*/ 
+filter:alpha(opacity=10);/*IE*/ 
+opacity:0.8;/*FF*/ 
+z-index:1; 
+position:fixed!important;/*FF IE7*/ 
+position:absolute;/*IE6*/ 
+
+_top: expression(eval(document.compatMode && 
+document.compatMode=='CSS1Compat') ? 
+documentElement.scrollTop + (document.documentElement.clientHeight-this.offsetHeight)/2 :/*IE6*/ 
+document.body.scrollTop + (document.body.clientHeight - this.clientHeight)/2);/*IE5 IE5.5*/ 
+
+} 
+.bb1, .bb2{
+	
+}
+.tupian1, .tupian2{
+	
+}
+
+/*The END*/ 
+
+</style> 
+
+<style>
+.zhe{
+width:100%;
+height:100%;
+
+z-index:1;
+}
+</style>
+
+
+<body style="background-color: antiquewhite;z-index:100" >
+<div  class="zhe">
+<div id="parent">
+<div id="scroll">
+<section>
+	{if !empty($img)}
+	<div class="index-banner">
+    <img src="{$_W['attachurl']}{$img}">
+	</div>
+	{/if}
+</section>
+<section>
+    <a href="uc.html">
+	<div class="index-info">
+	</div>
+    </a>
+</section>
+<section>{loop $reply1 $v}
+	<div class="index-single">
+      <a href="{php echo $this->createMobileUrl('lottery', array('id' => $v['rid']))}"><img src="{$_W['attachurl']}{$v['baoxiangimg']}" width="100%">
+     <!--<a onclick="showDiv(this.id)" id="{$v['rid']}"><img src="{$_W['attachurl']}{$v['baoxiang_img']}" width="100%">-->
+		{if $check_start[$v['rid']] == 4}
+		<em>今日已博</em>
+		{else}
+		<em>今日未博</em>
+		{/if}
+	</a>
+	</div>{/loop}
+	<div class="index-list">
+								  <ul class="clear">
+                                          
+											{loop $reply0 $v}
+											<!--	<li><a onclick="showDiv(this.id)" id="{$v['rid']}"><img src="{$_W['attachurl']}{$v['baoxiang_img']}" width="100%"style="max-height:300px;"><em>进入博饼区</em></a>
+												-->
+												<li><a href="{php echo $this->createMobileUrl('lottery', array('id' => $v['rid']))}"><img src="{$_W['attachurl']}{$v['baoxiangimg']}" width="100%"style="width:200px;height:150px">
+												{if $check_start[$v['rid']] == 4}
+													<em>今日已博</em>
+													{else}
+													<em>今日未博</em>
+												{/if}
+												</a>
+                                                </li>   
+											{/loop}
+                                                 </ul>
+	</div>
+
+</section>
+<div id="popDiv" class="mydiv" style="display:none;" class="bb2">
+<a href="" id='url'>
+<img src="../addons/hc_tonganbb/baoxiangstyle/img/jinru.png" width="40%"style="max-height:300px;" class="tupian1" >
+ </a>
+<a href="javascript:closeDiv()" class="bb1"><img src="../addons/hc_tonganbb/baoxiangstyle/img/xiaci.png" width="40%"style="max-height:300px;" class="tupian2" >
+</a>
+</div> 
+<div id="bg" class="bg" style="display:none;"></div> 
+
+
+<section style="padding-bottom:30px;"></section>
+</div>
+</div>
+<script language="javascript">
+jQuery(function(){
+	jQuery('.footer-bg').click(function(){
+		if(jQuery('.footer-nav .off').length){
+			jQuery('.footer-nav .footer-nav-plus').removeClass('off');
+			jQuery('.footer-bg').hide();
+			jQuery('.footer-nav dl').animate({opacity: "0"}, 100, "linear");
+		}
+	});
+	jQuery('.footer-nav .footer-nav-plus').click(function(){
+		if(jQuery('.footer-nav .off').length==0){
+			jQuery('.footer-nav .footer-nav-plus').addClass('off');
+			jQuery('.footer-bg').show();
+			jQuery('.footer-nav dl').show().animate({opacity: "1"}, 100, "linear");
+		}else{
+			jQuery('.footer-nav .footer-nav-plus').removeClass('off');
+			jQuery('.footer-bg').hide();
+			jQuery('.footer-nav dl').animate({opacity: "0"}, 100, "linear").hide();
+		}
+	});
+	jQuery('.footer-ad-close').click(function(){
+		jQuery(this).parent('.footer-ad').hide();
+	});
+});
+
+
+
+</script>
+<script language="javascript" src="../addons/hc_tonganbb/baoxiangstyle/js/jquery.lazyload.js"></script>
+<script language="javascript">
+jQuery(function() {          
+    jQuery("img").lazyload({
+        event : "scroll",
+		effect : "fadeIn",
+		threshold : 300,
+		placeholder : "/pages/images/bobingh5/load.gif"
+    });
+});
+</script>
+<script language="javascript">
+function show(a){
+
+	// var content2 = "<button value='222'   />";//弹出图片
+	//TINY.box.show(content2,0,0,0,1);
+	
+}
+</script>
+
+<script type="text/javascript"> 
+function showDiv(a){ 
+var rid=a;
+document.getElementById('popDiv').style.display='block'; 
+document.getElementById('bg').style.display='block'; 
+$('#url').attr('href','{php echo $this->createMobileUrl('lottery')}&id='+rid);
+} 
+
+function closeDiv(){ 
+document.getElementById('popDiv').style.display='none'; 
+document.getElementById('bg').style.display='none'; 
+} 
+
+</script> 
+
+
+
+<script language="javascript">
+
+</script>
+
+<script>
+var _hmt = _hmt || [];
+</script>
+
+
+<footer>
+        <div class="footer-bg" id=""></div>
+    <div class="footer-nav">
+            <span class="footer-nav-plus on" href="javascript:void(0)"></span>
+			<dl class="hide" id="bb" >
+			        <dd>
+						<a href="{$_W['siteroot']}app/index.php?i={$_W['uniacid']}&j={$_W['uniacid']}&c=mc&a=bond&do=credits&credittype=credit1">我的积分记录</a>
+					</dd>
+                    <dd><a href="{php echo $this->createMobileUrl('creditRank', array('id' => $id))}">总积分排行</a></dd>
+                    <dd><a href="{php echo $this->createMobileUrl('dayrank', array('id' => $id))}">日积分排行</a></dd> 
+                    <dd><a href="{php echo $this->createMobileUrl('exchange', array('id' => $id))}">奖品兑换</a></dd>
+                    <dd><a href="{php echo $this->createMobileUrl('mygoods', array('id' => $id))}">兑换记录</a></dd>
+                    <dd><a href="{php echo $this->createMobileUrl('rule_des', array('id' => $id))}">规则说明</a></dd>
+
+            </dl>
+    </div>
+</footer>
+
+    <div style="display: none">
+          <script type="text/javascript" src="http://tajs.qq.com/stats?sId=51104868" charset="UTF-8"></script>
+    </div>
+</div>
+
+
+
+
+</body>
+
+
+</html>

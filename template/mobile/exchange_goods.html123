@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>兑换商品</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<!-- Mobile Devices Support @begin -->
+	<meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+	<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+	<meta content="no-cache" http-equiv="pragma">
+	<meta content="0" http-equiv="expires">
+	<meta content="telephone=no, address=no" name="format-detection">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes"> <!-- apple devices fullscreen -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<!-- Mobile Devices Support @end -->
+	<script type="text/javascript" src="../addons/hc_tonganbb/baoxiangstyle/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="../addons/hc_tonganbb/baoxiangstyle/js/common.js"></script>
+		<link type="text/css" rel="stylesheet" href="../addons/hc_tonganbb/baoxiangstyle/css/bootstrap.css">
+	<script type="text/javascript" src="../addons/hc_tonganbb/baoxiangstyle/js/bootstrap.js"></script>
+	<link type="text/css" rel="stylesheet" href="../addons/hc_tonganbb/baoxiangstyle/css/common.mobile.css">
+
+</head>
+<style>
+/*重定义bootstrap样式*/
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input{width:100%; margin-bottom:0; box-sizing:border-box; -webkit-box-sizing:border-box; -moz-box-sizing:border-box;}
+input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input{height:30px;}
+.input-append, .input-prepend{width:100%; margin-bottom:0;}
+select{padding:0 5px; line-height:28px; -webkit-appearance:button;}
+.checkbox.inline{margin-top:0;}
+.checkbox.inline + .checkbox.inline {margin-left:0;}
+.checkbox input[type="checkbox"]{filter:alpha(opacity:0); opacity:0;}
+.file{position:relative;}
+.file input[type="file"]{position:absolute; top:0; left:0; width:100%; filter:alpha(opacity:0); opacity:0;}
+.file button{width:100%; text-align:left;}
+.form-item{border-left:3px #ED2F2F solid; padding-left:10px; height:30px; line-height:30px; background:#F7F7F7; margin-bottom:10px;}
+.contentimg img{
+     width:100%;
+     max-width:100%
+}
+
+</style>
+<body>
+<link type="text/css" rel="stylesheet" href="../addons/hc_tonganbb/baoxiangstyle/css/base.css" />
+<link type="text/css" rel="stylesheet" href="../addons/hc_tonganbb/baoxiangstyle/style.css?v=1" />
+<script type="text/javascript" src="../addons/hc_tonganbb/baoxiangstyle/js/script.js"></script>
+<title>兑奖信息</title>
+	<section class="reserve">
+    	<!--content-->
+        <section class="reserve_content">
+        	<!--title-->
+            <p class="reserve_title"><span>请认真填写以下信息,客服人员将会与您联系</span></p>
+            <!--tielt end-->
+            <!--details-->
+            <section class="reserve_details">
+			{php foreach(explode("-",$goods['name']) as $v) echo "<p>" . $v . "</p>"; }
+            </section>
+            <!--details end-->
+			<!--data-->
+			<section class="reserve_data">
+
+			<form action="{php echo $this->createMobileUrl('getgoods')}" method="post" data-ajax="false" onsubmit="return check(this)">
+				<input name="goodsid" type="hidden" id="goodsid" value="{$goods['id']}" />
+				<section class="data_box">
+				<label class="data_box_l">真实姓名</label>
+				<span class="data_box_r"><input type="text" name="realname" value="{$profile['realname']}" placeholder="请输入您的真实姓名" class="txt" /></span>
+				</section>
+                <section class="data_box">
+                    	<label class="data_box_l">联系电话</label>
+						<span class="data_box_r"><input name="mobile" type="text" value="{$profile['mobile']}" placeholder="请输入您的手机" class="txt" /></span>
+				</section>
+                 <section class="data_box">
+                    	<label class="data_box_l">地址</label>
+						<span class="data_box_r"><input name="address" type="text" value="" placeholder="请输入您的邮寄地址" class="txt" /></span>
+				</section>
+				<section class="data_box">
+                    	<label class="data_box_l">兑换数量</label>
+						<span class="data_box_r"><input name="num" type="text" value="{$profile['num']}" placeholder="请输入您的兑换数量" class="txt" /></span>
+				</section>
+              
+                    <!--btn-->
+                    <section class="reserve_btn_box">
+                        <input type="submit" value="提交登记" class="reserve_btn" />
+                    </section>
+                    <!--btn end-->
+					<input type="hidden" name="token" value="{$_W['token']}" />
+                </form>
+            </section>
+            <!--data end-->
+        </section>
+        <!--content end-->
+		</section>
+
+		<script type="text/javascript">
+			function check(form) {
+				if (!form['realname'].value) {
+					alert('请输入您的真实姓名！');
+					return false;
+				}
+				if (!form['mobile'].value) {
+					alert('请输入您的手机号码！');
+					return false;
+				}
+				if (!/^1[0-9]{10}/.test(form['mobile'].value)) {
+					alert('请输入正确的手机号码！');
+					return false;
+				}
+				if (!form['num'].value) {
+					alert('请输入您的兑换数量');
+					return false;
+				}
+				if (form['num'].value == 0) {
+					alert('数量不能为0！');
+					return false;
+				}
+				var reg1 =  /^\d+$/;
+				if(form['num'].value.match(reg1) ==null){
+					alert('请输入正整数');
+					return false;
+				}
+				return true;
+			}
+</script>
+<div id="footer">&copy;{$_W['account']['name']}&nbsp;&nbsp;</div></div>
+
+
+<script type="text/javascript">
+$(function() {
+	$(".user-box .box-item").each(function(i) {
+		i = i +1;
+		if(i%3 == 0) $(this).css("border-right", "0");
+	});
+	$(window).scroll(function(){
+		$(".menu-button").find("i").removeClass("icon-minus-sign").addClass("icon-plus-sign");
+		$(".menu-main").hide();
+	});
+	$(".menu-main a").click(function(){ $(".menu-main").hide(); });
+
+	//控制tab宽度
+	var profile_tab = $(".nav-tabs li");
+	profile_tab.css({"width": 100/profile_tab.length+"%", "text-align": "center"});
+
+	//手机表单处理
+	$(".form-table").delegate(".checkbox input[type='checkbox']", "click", function(){
+		$(this).parent().toggleClass("btn-inverse");
+	});
+	$(".form-table").delegate(".file input[type='file']", "change", function(){
+		var a = $(this).next("button");
+		a.html(a.html() +' '+  $(this).val());
+	});
+
+	//处理固定横向导航条
+	var navbarFixedTop = false, navbarFixedBottom = false;
+	navbarFixedTop = $(".navbar").hasClass("navbar-fixed-top");
+	navbarFixedBottom = $(".navbar").hasClass("navbar-fixed-bottom");
+	if(navbarFixedTop) $("body").css("padding-top", "41px");
+	if(navbarFixedBottom) $("body").css("padding-bottom", "41px");
+});
+
+//对分享时的数据处理
+function _removeHTMLTag(str) {
+	str = str.replace(/<script[^>]*?>[\s\S]*?<\/script>/g,'');
+	str = str.replace(/<style[^>]*?>[\s\S]*?<\/style>/g,'');
+    str = str.replace(/<\/?[^>]*>/g,'');
+    str = str.replace(/\s+/g,'');
+    str = str.replace(/&nbsp;/ig,'');
+    return str;
+}
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+			var _share_img = $('body img:eq(0)').attr("src");
+	if(typeof(_share_img) == "undefined") _share_img = "http://wx.weixiamen.cn/source/modules/webbb/icon.jpg";
+	if(_share_img.indexOf("http://") == -1 || _share_img.indexOf("https://") == -1 ) _share_img = "http://wx.weixiamen.cn/" + _share_img;
+			var _share_content = _removeHTMLTag($('body').html()).replace("火池网络",'');
+		window.shareData = {
+		"imgUrl": _share_img,
+		"timeLineLink": "http://wx.weixiamen.cn/mobile.php?act=module&name=webbb&do=award&weid=4&wxref=mp.weixin.qq.com",
+		"sendFriendLink": "http://wx.weixiamen.cn/mobile.php?act=module&name=webbb&do=award&weid=4&wxref=mp.weixin.qq.com",
+		"weiboLink": "http://wx.weixiamen.cn/mobile.php?act=module&name=webbb&do=award&weid=4&wxref=mp.weixin.qq.com",
+		"tTitle": "火池网络",
+		"tContent":  _share_content,
+		"fTitle": "火池网络",
+		"fContent":  _share_content,
+		"wContent":  "火池网络"
+	};
+
+	// 发送给好友
+	WeixinJSBridge.on('menu:share:appmessage', function (argv) {
+		WeixinJSBridge.invoke('sendAppMessage', {
+			"img_url": window.shareData.imgUrl,
+			"img_width": "640",
+			"img_height": "640",
+			"link": window.shareData.sendFriendLink,
+			"desc": window.shareData.fContent,
+			"title": window.shareData.fTitle
+		}, function (res) {
+			_report('send_msg', res.err_msg);
+		})
+	});
+
+	// 分享到朋友圈
+	WeixinJSBridge.on('menu:share:timeline', function (argv) {
+		WeixinJSBridge.invoke('shareTimeline', {
+			"img_url": window.shareData.imgUrl,
+			"img_width": "640",
+			"img_height": "640",
+			"link": window.shareData.timeLineLink,
+			"desc": window.shareData.tContent,
+			"title": window.shareData.tTitle
+		}, function (res) {
+			_report('timeline', res.err_msg);
+		});
+	});
+
+	// 分享到微博
+	WeixinJSBridge.on('menu:share:weibo', function (argv) {
+		WeixinJSBridge.invoke('shareWeibo', {
+			"content": window.shareData.wContent,
+			"url": window.shareData.weiboLink
+		}, function (res) {
+			_report('weibo', res.err_msg);
+		});
+	});
+}, false);
+</script>
+</div></body>
+</html>

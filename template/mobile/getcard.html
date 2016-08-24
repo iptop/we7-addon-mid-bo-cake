@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{$weibb['title']}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="Pragma" content="no-cache">
+<link rel="stylesheet" type="text/css" href="../addons/hc_tonganbb/images/main.css">
+
+	<body>
+			
+			<img src="http://520.nidecun.cn/addons/hc_tonganbb/images/spacer.gif" style="    position: absolute;top: 50%;left: 30%;"><span style="    position: absolute;top: 51%;left: 40%;">获取卡券中...</span>
+		
+		
+
+	
+<script>
+	var bobingright= true ;
+    bobing.username =  "";
+    bobing.remainder = {$arr_times['today_has']};
+    window.addEventListener('load', initializebobing, false);
+		window.shareData = {
+		"imgUrl": "{$_W['siteroot']}source/modules/weibb/template/images/d1.png",
+		"timeLineLink": "{$_W['siteroot']}{php echo $this->createMobileUrl('lottery', array('id' => $id,'share' => 'share','uid' => $myuser['id']))}",
+		"sendFriendLink": "{$_W['siteroot']}{php echo $this->createMobileUrl('lottery', array('id' => $id,'share' => 'share','uid' => $myuser['id']))}",
+		"weiboLink": "{$_W['siteroot']}{php echo $this->createMobileUrl('lottery', array('id' => $id,'share' => 'share','uid' => $myuser['id']))}",
+		"tTitle": "{$weibb['title']}",
+		"tContent": "{$weibb['description']}",
+		"fTitle": "{$weibb['description']}",
+		"fContent": "{$weibb['description']}",
+		"wContent": "{$weibb['description']}"
+	};
+</script>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+{php $signPackage=$_W['account'][jssdkconfig];}	           
+<script type="text/javascript">
+  wx.config({
+    debug: false,
+    appId: '<?php echo $signPackage["appId"];?>',
+    timestamp: '<?php echo $signPackage["timestamp"];?>',
+    nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+    signature: '<?php echo $signPackage["signature"];?>',
+    jsApiList: [
+      'onMenuShareAppMessage',
+	  'onMenuShareTimeline',
+	  'onMenuShareQQ',	  
+    ]
+  });
+  wx.ready(function () {
+    wx.onMenuShareAppMessage({
+      title: "{$weibb['title']}",
+      desc: window.shareData.fTitle,
+      link: "{$_W['siteroot']}{php echo $this->createMobileUrl('index', array('id' => $rid,'share' => 'share','shareid' => $member['id']))}",
+      imgUrl: "{$_W['siteroot']}addons/hc_tonganbb/images/d1.png",
+      trigger: function (res) {
+        //alert('用户点击发送给朋友');
+      },
+      success: function (res) {
+        //window.location.href =adurl;//分享成功回调
+      },
+      cancel: function (res) {
+       //window.location.href =adurl;//取消回调
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));//失败回调
+      }
+    });
+	wx.onMenuShareTimeline({
+      title: "{$weibb['title']}",
+      desc: window.shareData.fTitle,
+      link: "{$_W['siteroot']}{php echo $this->createMobileUrl('index', array('id' => $rid,'share' => 'share','shareid' => $member['id']))}",
+      imgUrl: "{$_W['siteroot']}addons/hc_tonganbb/images/d1.png",
+      trigger: function (res) {
+        //alert('用户点击发送给朋友');
+      },
+      success: function (res) {
+        //window.location.href =adurl;//分享成功回调
+      },
+      cancel: function (res) {
+       //window.location.href =adurl;//取消回调
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));//失败回调
+      }
+    });
+	wx.onMenuShareQQ({
+      title: "{$weibb['title']}",
+      desc: window.shareData.fTitle,
+      link: "{$_W['siteroot']}{php echo $this->createMobileUrl('index', array('id' => $rid,'share' => 'share','shareid' => $member['id']))}",
+      imgUrl: "{$_W['siteroot']}addons/hc_tonganbb/images/d1.png",
+      trigger: function (res) {
+        //alert('用户点击发送给朋友');
+      },
+      success: function (res) {
+        //window.location.href =adurl;//分享成功回调
+      },
+      cancel: function (res) {
+       //window.location.href =adurl;//取消回调
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));//失败回调
+      }
+    });
+	
+	
+	
+	
+  });
+  
+  
+  function jumpCardUrl(){
+	wx.addCard({
+    cardList: [{
+        cardId: '{$cardArry['cardId']}',
+        cardExt: '{"code": "", "openid": "{$cardArry['openid']}", "timestamp": "{$cardArry['timestamp']}","nonce_str":"{$cardArry['nonceStr']}", "signature":"{$cardArry['signature']}"}'
+    }], // 需要添加的卡券列表
+    success: function (res) {
+        var cardList = res.cardList; // 添加的卡券列表信息
+    }
+});	
+}
+  
+  
+  
+  
+</script>
+
+</body>
+</html>

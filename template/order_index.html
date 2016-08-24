@@ -1,0 +1,92 @@
+{template 'common/header'}
+
+<ul class="nav nav-tabs">
+	<li class="active"><a href="{php echo $this->createWebUrl('order')}">兑换请求管理</a></li>
+	<li><a href="{php echo $this->createWebUrl('excle')}">导出excle</a></li>
+	<!--<li ><a href="{php echo $this->createMobileUrl('rankbaoxiang')}">包厢积分排行</a></li>-->
+</ul>
+
+<div class="main">
+    <div class="panel panel-info">
+	<div class="panel-heading">筛选</div>
+	<div class="panel-body">
+		<form action="{$_W['siteroot']}web/{php echo $this->createWebUrl('ordersearch',array(),true)}" method="post" class="form-horizontal" role="form">
+			
+                
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label" style="width:9%">选择查询条件</label>
+				<div class="col-sm-8 col-lg-9">
+                       <select class="form-control" name="key" id=""  value="{$_GPC['key']}" placeholder="查询条件">
+							<option value="昵称" {if $_GPC['key'] == '昵称'} selected {/if}>昵称</option>
+							<option value="联系方式" {if $_GPC['key'] == '联系方式'} selected {/if}>联系方式</option>	
+							
+					   </select>
+				</div>
+			</div> 
+                <div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label" style="width:9%">输入查询信息</label>
+				<div class="col-sm-8 col-lg-9">
+					<input class="form-control" name="keyword" id="" type="text" value="{$_GPC['keyword']}" placeholder="">
+				</div>
+					<div class="col-sm-3 col-lg-2" style="float: right;"><button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button></div>
+				</div> 
+
+			<div class="form-group">
+			</div>
+		</form>
+	</div>
+	</div>
+<div></div>
+	<div class="panel panel-default">
+	<div class="panel-body table-responsive">
+		<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th style="width:70px;">昵称</th>
+					<th style="width:80px;">兑换商品</th>
+					<th style="width:80px;">兑换数量</th>
+					<th style="width:100px;">兑换时间</th>
+					<th style="width:100px;">联系方式</th>
+					<th style="width:220px;">地址</th>
+					<th style="width:60px;">是否领取</th>
+					<th style="width:120px; text-align:right;">操作</th>	
+				</tr>
+			</thead>
+			<tbody>
+				{loop $order $item}
+				<tr>
+					<td>{$item['realname']}</td>
+					<td>{$item['name']}</td>
+					<td>{$item['num']}</td>
+					<td>{php echo date('Y-m-d H:i:s', $item['createtime'])}</td>
+					<td>{$item['mobile']}</td>
+					<td>{$item['address']}</td>
+					<td>
+						{if $item['status'] == '3'}
+							<span class="label label-danger">未领取</span>
+						{/if}
+						{if $item['status'] == '4'}
+							<span class="label label-success">已领取</span>
+						{/if}
+					</td>
+					<td style="text-align:right;">
+						{if $item['status']==4}<a href="{php echo $this->createWebUrl('order_status',array('status'=>'3','orderid'=>$item['id'],'url'=>'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']))}"><p style="color:red" id="{$item['id']}">取消领取</p></a>{/if}
+						{if $item['status']==3}<a href="{php echo $this->createWebUrl('order_status',array('status'=>'4','orderid'=>$item['id'],'url'=>'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']))}"><p style="color:green" id="{$item['id']}">领取</p></a>{/if}
+					</td>
+				</tr>
+				{/loop}
+			</tbody>
+			<!--tr>
+				<td></td>
+				<td colspan="3">
+					<input name="token" type="hidden" value="{$_W['token']}" />
+					<input type="submit" class="btn btn-primary" name="submit" value="提交" />
+				</td>
+			</tr-->
+		</table>
+	</div>
+	</div>
+</div>
+{$pager}
+
+{template 'common/footer'}
