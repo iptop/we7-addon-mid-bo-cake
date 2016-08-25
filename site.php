@@ -225,6 +225,40 @@ exit;
 		$pager = pagination($total, $pindex, $psize);
 		include $this->template('rankview_index');
 	}
+
+
+
+    public function doWebrankview1(){
+        global $_W,$_GPC;
+        //$today = pdo_fetchall(" SELECT rid, nickname, SUM(credit) AS credit FROM ".tablename('hc_tonganbb_user')." WHERE  weid='".$_W['uniacid']."' GROUP BY mid ORDER BY credit DESC  ");
+
+        $start_time=date('Y-m-d');
+        if(isset($_POST['start_time'])){
+            $start_time=$_POST['start_time'];
+        }
+
+        $st=strtotime($start_time);
+        $et=$st+3600*24;
+
+
+
+        $today = pdo_fetchall(
+            " select  ta.from_user,sum(ta.titleid) as s, tm.mobile, tm.createtime, tm.nickname,tm.username from  ".
+            tablename('hc_tonganbb_user')." as ta left join ".
+            tablename('hc_tonganbb_member')." as tm on ta.from_user=tm.openid ".
+            " where ta.createtime>= $st and ta.createtime< $et".
+            " group by ta.from_user"
+        );
+
+
+        foreach($today as $key=>$val){
+            $today[$key]['key']=$key+1;
+        }
+
+
+        include $this->template('rankview_index1');
+    }
+
 	
 	//总积分排行榜查询
 	public function doWebrankviewsearch(){
@@ -513,7 +547,26 @@ exit;
 		foreach($start as $n=>$a){
 			$check_start[$a['rid']] = 4;
 		}
-		include $this->template('baoxiang');
+
+        pdo_fetchall("update ".tablename('hc_tonganbb_count')." set  value=value+1 where name=0 ");
+
+
+        $sumcount=pdo_fetchall("select * from ".tablename('hc_tonganbb_count')." where name=0 ");
+
+        $sumcount=$sumcount[0]['value'];
+
+
+        $totalcount = pdo_fetchall( " SELECT u.rid, u.nickname, SUM(u.credit) AS credit, m.createtime, m.openid FROM ".tablename('hc_tonganbb_user')." AS u LEFT JOIN ".tablename('hc_tonganbb_member')." AS m ON u.mid=m.id WHERE  u.weid='".$_W['uniacid']."' GROUP BY u.mid ORDER BY credit DESC  " );
+        $totalcount= sizeof($totalcount);
+
+
+        $clickcount=pdo_fetchall("select * from ".tablename('hc_tonganbb_count')." where name=1 ");
+
+        $clickcount=$clickcount[0]['value'];
+
+
+
+        include $this->template('baoxiang');
 	}
 	
 	//修改资料
@@ -566,7 +619,8 @@ exit;
 		$id = intval($_GPC['id']);
 		$rid = intval($_GPC['id']);
 		$fromuser = $_W['openid'];
-		
+
+
 		//检测浏览器
 		$this->checkBowser();
 		$weibb = pdo_fetch("SELECT * FROM ".tablename('hc_tonganbb_reply')." WHERE rid = '$id' LIMIT 1");
@@ -643,7 +697,6 @@ exit;
 			$chajinghua = pdo_fetch(" SELECT * FROM ".tablename('hc_tonganbb_award')." WHERE `rid`=".$rid." AND `title`='状元插金花'  ");
 
 
-        pdo_update('hc_tonganbb_member',$member,array('openid'=>$member['openid']));
 
 
         if($member['mobile']=='' || $member['username']==''){
@@ -705,7 +758,13 @@ exit;
 	
 	//ajax轻松，获得博饼结果
 	public function doMobileGetAward() {
-		global $_GPC, $_W;
+
+
+
+        pdo_fetchall("update ".tablename('hc_tonganbb_count')." set  value=value+1 where name=1 ");
+
+
+        global $_GPC, $_W;
 		$fromuser = $_W['openid'];
 		$this->checkBowser();
 		
@@ -1191,20 +1250,23 @@ exit;
 	
 	//检测用户是否已关注公众号
 	public function checkFollow($rid){
+
+
+
 		global $_W,$_GPC;
 		$openid = $_W['openid'];
 		$weibb = pdo_fetch( " SELECT * FROM ".tablename('hc_tonganbb_reply')." WHERE rid='".$rid."' " );
 		if(empty($openid)){
 			//message( " 必须先关注本公众号才能进行游戏 ", $weibb['guanzhuUrl'], 'success' );
 			$checkfollow = 4;
-			include $this->template('index');
+			include $this->template('webbb1');
 			exit;
 		}
 		$fans = pdo_fetch( " SELECT * FROM ".tablename('mc_mapping_fans')." WHERE openid='".$openid."' AND uniacid=".$_W['uniacid']." " );
 		if(empty($fans) || $fans['follow'] == 0){
 			//message( " 必须先关注本公众号才能进行游戏 ", $weibb['guanzhuUrl'], 'success' );
 			$checkfollow = 4;
-			include $this->template('index');
+			include $this->template('webbb1');
 			exit;
 		}
 		

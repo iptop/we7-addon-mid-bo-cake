@@ -24,7 +24,8 @@
 		</rule>
 		<menu>
 			<entry title="查看排行榜" do="rankview" direct="false" />
-			<entry title="兑换商品管理" do="exchange" direct="false" />
+            <entry title="排行查询" do="rankview" direct="false" />
+            <entry title="兑换商品管理" do="exchange" direct="false" />
 			<entry title="兑换请求管理" do="order" direct="false" />
 		</menu>
 	</bindings>

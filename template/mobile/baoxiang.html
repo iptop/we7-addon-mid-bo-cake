@@ -6,7 +6,9 @@
 <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="MobileOptimized" content="320"/>
 <title>2015同安生活网第4届网络博饼嘉年华</title>
-<link href="http://bobing.xmfish.com/pages/styles/bobingh5/wap.css" rel="stylesheet" type="text/css">
+    <link href="../addons/hc_tonganbb/images/frozen.css" rel="stylesheet" type="text/css">
+
+    <link href="http://bobing.xmfish.com/pages/styles/bobingh5/wap.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="http://bbs.xmfish.com/apps/rt/www/js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="../addons/hc_tonganbb/baoxiangstyle/js/tinybox.js"></script>
 </head>
@@ -79,6 +81,8 @@ z-index:1;
 
 
 <body style="background-color: antiquewhite;z-index:100" >
+
+
 <div  class="zhe">
 <div id="parent">
 <div id="scroll">
@@ -89,6 +93,13 @@ z-index:1;
 	</div>
 	{/if}
 </section>
+    <section>
+        <ul class="ui-tiled" style="color: #fff;">
+            <li style="background:#e40e0e; margin: 10px; padding-top: 5px;padding-bottom: 5px;  border-radius: 30px;"><div>参与人数</div><i>{$totalcount}</i></li>
+            <li style="background:#e40e0e; margin: 10px; padding-top: 5px;padding-bottom: 5px; border-radius: 30px;"><div>参与人次</div><i>{$clickcount}</i></li>
+            <li style="background:#e40e0e; margin: 10px; padding-top: 5px;padding-bottom: 5px; border-radius: 30px;"><div>总人气</div><i>{$sumcount}</i></li>
+        </ul>
+    </section>
 <section>
     <a href="uc.html">
 	<div class="index-info">
