@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="¡±apple-mobile-web-app-capable¡±" content="¡±yes¡±">
+<meta name="ï¿½ï¿½apple-mobile-web-app-capableï¿½ï¿½" content="ï¿½ï¿½yesï¿½ï¿½">
 <meta content="telephone=no" name="format-detection"> 
 <title>{$webbb['title']}</title>
 <link href="../addons/hc_tonganbb/baoxiangstyle/css/style.css" rel="stylesheet" type="text/css">
@@ -54,20 +54,20 @@
 			<img src="../addons/hc_tonganbb/baoxiangstyle/img/zongjifen3.jpg" border="0" alt="">
 			<span class="ranking-time"></span>
 		</div>
-		<!--²éÑ¯²¿·Ö-->
+		<!--ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½-->
 		<form action="{php echo $this->createMobileUrl('search_rank')}" method="post">
 		<div style="width:100%">
-			<input type="text" style="width:98%;height:25px" name="keyword" value="{$keyword}" placeholder="²éÑ¯¸ñÊ½£º2015-9-1" />
+			<input type="text" style="width:98%;height:25px" name="keyword" value="{$keyword}" placeholder="ï¿½ï¿½Ñ¯ï¿½ï¿½Ê½ï¿½ï¿½2015-9-1" />
 			<div style="height:10px"></div>
-			<input name="submit" type="submit" value="²éÑ¯" class="btn " style="width:99%;height:35px">
+			<input name="submit" type="submit" value="æŸ¥è¯¢" class="btn " style="width:99%;height:35px">
 			<div style="height:10px"></div>
 		</div>
 		</form>
 		<div class="ranking-list" >
 			<div class="tr">
-				<div class="th th1">Ãû´Î<span class="arrow arrow-bottom"></span></div>
-				<div class="th th2">êÇ³Æ<span class="arrow arrow-bottom"></span></div>
-				<div class="th th3">»ı·Ö<span class="arrow arrow-bottom"></span></div>
+				<div class="th th1">æ’å<span class="arrow arrow-bottom"></span></div>
+				<div class="th th2">æ˜µç§°<span class="arrow arrow-bottom"></span></div>
+				<div class="th th3">åˆ†æ•°<span class="arrow arrow-bottom"></span></div>
 			</div>
 
 			{loop $mycredit $k  $ph}
@@ -122,7 +122,7 @@ WeixinJSBridge.call('hideToolbar');
 		"wContent": "{$webbb['description']}"
 	};
 
-	// ·¢ËÍ¸øºÃÓÑ
+	// ï¿½ï¿½ï¿½Í¸ï¿½ï¿½ï¿½ï¿½
 	WeixinJSBridge.on('menu:share:appmessage', function (argv) {
 		WeixinJSBridge.invoke('sendAppMessage', {
 			"img_url": window.shareData.imgUrl,
@@ -136,7 +136,7 @@ WeixinJSBridge.call('hideToolbar');
 		})
 	});
 
-	// ·ÖÏíµ½ÅóÓÑÈ¦
+	// ï¿½ï¿½ï¿½?ï¿½ï¿½ï¿½ï¿½È¦
 	WeixinJSBridge.on('menu:share:timeline', function (argv) {
 		WeixinJSBridge.invoke('shareTimeline', {
 			"img_url": window.shareData.imgUrl,
@@ -150,7 +150,7 @@ WeixinJSBridge.call('hideToolbar');
 		});
 	});
 
-	// ·ÖÏíµ½Î¢²©
+	// ï¿½ï¿½ï¿½?Î¢ï¿½ï¿½
 	WeixinJSBridge.on('menu:share:weibo', function (argv) {
 		WeixinJSBridge.invoke('shareWeibo', {
 			"content": window.shareData.wContent,

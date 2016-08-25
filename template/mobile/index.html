@@ -28,7 +28,9 @@ body {
 
 <body>
 {if $checkfollow == 4}
-<img id="shareImg" src="../addons/hc_tonganbb/baoxiangstyle/img/guanzhu.png" width="100%" style=" position: absolute; z-index: 10000; height: 100%; " >
+<a onclick=" document.querySelector('#shareImg').style.display='block'" style="text-decoration: none" >		<img src="{$_W['attachurl']}{$weibb['indexPicture']}" width="100%"></a>
+
+<img id="shareImg" src="../addons/hc_tonganbb/baoxiangstyle/img/guanzhu.png" width="100%" style=" display: none; position: fixed; left: 0;top: 0; z-index: 10000; height: 100%; " >
 {else}
 		<a href="{php echo $this->createMobileUrl('select', array('id' => $rid))}" style="text-decoration: none" >		<img src="{$_W['attachurl']}{$weibb['indexPicture']}" width="100%"></a>
 {/if}	

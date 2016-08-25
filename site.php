@@ -1259,14 +1259,14 @@ exit;
 		if(empty($openid)){
 			//message( " 必须先关注本公众号才能进行游戏 ", $weibb['guanzhuUrl'], 'success' );
 			$checkfollow = 4;
-			include $this->template('webbb1');
+			include $this->template('index');
 			exit;
 		}
 		$fans = pdo_fetch( " SELECT * FROM ".tablename('mc_mapping_fans')." WHERE openid='".$openid."' AND uniacid=".$_W['uniacid']." " );
 		if(empty($fans) || $fans['follow'] == 0){
 			//message( " 必须先关注本公众号才能进行游戏 ", $weibb['guanzhuUrl'], 'success' );
 			$checkfollow = 4;
-			include $this->template('webbb1');
+			include $this->template('index');
 			exit;
 		}
 		
