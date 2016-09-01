@@ -242,18 +242,53 @@ exit;
 
 
 
-        $today = pdo_fetchall(
+/*        $today = pdo_fetchall(
             " select  ta.from_user,sum(ta.titleid) as s, tm.mobile, tm.createtime, tm.nickname,tm.username from  ".
             tablename('hc_tonganbb_user')." as ta left join ".
             tablename('hc_tonganbb_member')." as tm on ta.from_user=tm.openid ".
             " where ta.createtime>= $st and ta.createtime< $et".
-            " group by ta.from_user"
+            " group by ta.from_user".
+            " LIMIT 10"
         );
 
 
         foreach($today as $key=>$val){
             $today[$key]['key']=$key+1;
+        }*/
+
+
+        $now = time();
+        $beginTime = date('Y-m-d 00:00:00', $now);
+        $tStart = strtotime($beginTime);
+        $tEnd = strtotime($beginTime) +86400;
+        $yEnd = strtotime($beginTime);
+        $yStart = strtotime($beginTime) -86400;
+        $today = pdo_fetchall(" SELECT rid, nickname, SUM(credit) AS s FROM "
+            .tablename('hc_tonganbb_user')
+            ." WHERE createtime>".$st." AND createtime<=".$et.
+            " GROUP BY mid ORDER BY s DESC   LIMIT 30  ");
+
+
+
+
+        foreach($today as $key=>$val){
+            $today[$key]['key']=$key+1;
+
+
+            $nickname=$val['nickname'];
+
+            $d = pdo_fetchall("select * from ".tablename('hc_tonganbb_member')
+            ."where nickname= '$nickname' "
+            );
+
+            if(count($d)>0){
+                $today[$key]['username']=$d[0]['username'];
+                $today[$key]['mobile']=$d[0]['mobile'];
+
+            }
         }
+
+
 
 
         include $this->template('rankview_index1');
@@ -697,6 +732,7 @@ exit;
 			$chajinghua = pdo_fetch(" SELECT * FROM ".tablename('hc_tonganbb_award')." WHERE `rid`=".$rid." AND `title`='状元插金花'  ");
 
 
+       /* var_dump($member);*/
 
 
         if($member['mobile']=='' || $member['username']==''){
