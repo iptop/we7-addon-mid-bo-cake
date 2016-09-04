@@ -257,6 +257,16 @@ var gamecoin = 0;
 sound.load();
 
 
+var sound1 = new Audio('../addons/hc_newbb/template/images/audio1.mp3');sound1.load()
+var sound2 = new Audio('../addons/hc_newbb/template/images/audio2.mp3');sound2.load()
+var sound3 = new Audio('../addons/hc_newbb/template/images/audio3.mp3');sound3.load()
+var sound4 = new Audio('../addons/hc_newbb/template/images/audio4.mp3');sound4.load()
+var sound5 = new Audio('../addons/hc_newbb/template/images/audio5.mp3');sound5.load()
+var sound6 = new Audio('../addons/hc_newbb/template/images/audio6.mp3');sound6.load()
+var sound7 = new Audio('../addons/hc_newbb/template/images/audio7.mp3');sound7.load()
+
+
+
 
 //window.sounds['music'].play();
 
@@ -892,9 +902,8 @@ function addinfo(str) {
 
 			$("#txt").html("分享好友，再来一次");
 
-
-
-			break;
+            sound1.play()
+            break;
 
 
 
@@ -916,9 +925,11 @@ function addinfo(str) {
 
 			wxShare(laststr2);
 
+            sound2.play()
 
 
-			break;
+
+            break;
 
 
 
@@ -940,9 +951,10 @@ function addinfo(str) {
 
 			wxShare(laststr2);
 
+            sound3.play()
 
 
-			break;
+            break;
 
 
 
@@ -964,9 +976,10 @@ function addinfo(str) {
 
 			wxShare(laststr2);
 
+            sound4.play()
 
 
-			break;
+            break;
 
 
 
@@ -988,9 +1001,10 @@ function addinfo(str) {
 
 			wxShare(laststr2);
 
+            sound5.play()
 
 
-			break;
+            break;
 
 
 
@@ -1021,8 +1035,10 @@ function addinfo(str) {
 			wxShare(laststr2);
 
 
+            sound6.play()
 
-			break;
+
+            break;
 
 
 
@@ -1050,9 +1066,11 @@ function addinfo(str) {
 
 
 
+            sound7.play()
 
 
-			break;
+
+            break;
 
 
 

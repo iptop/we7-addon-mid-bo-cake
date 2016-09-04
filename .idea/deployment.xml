@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="117.28.254.81">
+  <component name="PublishConfigData" serverName="117.28.254.81" showNewOnTargetInSync="false">
     <serverData>
       <paths name="117.28.254.81">
         <serverdata>
           <mappings>
-            <mapping deploy="/wq6.hggg.net/addons/hc_tonganbb" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/wq6.hggg.net/addons/hc_newbb" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
